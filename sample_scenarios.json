@@ -1,0 +1,358 @@
+{
+  "organization": {
+    "name": "Acme Financial Corp",
+    "revenue": 500000000,
+    "employees": 5000,
+    "industry": "financial_services",
+    "headquarters": "Amsterdam, Netherlands"
+  },
+
+  "assets": [
+    {
+      "id": "asset-001",
+      "name": "Customer PII Database",
+      "type": "data",
+      "records": 2000000,
+      "value": { "min": 5000000, "likely": 15000000, "max": 50000000 },
+      "description": "Primary customer database with PII, payment data, and account details"
+    },
+    {
+      "id": "asset-002",
+      "name": "Intellectual Property & Trade Secrets",
+      "type": "data",
+      "records": 0,
+      "value": { "min": 10000000, "likely": 30000000, "max": 80000000 },
+      "description": "Proprietary algorithms, financial models, and strategic plans"
+    },
+    {
+      "id": "asset-003",
+      "name": "Cloud Infrastructure (AWS/Azure)",
+      "type": "infrastructure",
+      "records": 0,
+      "value": { "min": 2000000, "likely": 8000000, "max": 20000000 },
+      "description": "Production cloud environment hosting core banking and trading platforms"
+    },
+    {
+      "id": "asset-004",
+      "name": "Software Supply Chain",
+      "type": "software",
+      "records": 0,
+      "value": { "min": 3000000, "likely": 10000000, "max": 25000000 },
+      "description": "CI/CD pipelines, third-party dependencies, and build systems"
+    },
+    {
+      "id": "asset-005",
+      "name": "Core Financial Systems",
+      "type": "system",
+      "records": 0,
+      "value": { "min": 20000000, "likely": 50000000, "max": 100000000 },
+      "description": "ERP, treasury management, trading platforms, and payment processing"
+    },
+    {
+      "id": "asset-006",
+      "name": "E-Commerce & Digital Banking Platform",
+      "type": "application",
+      "records": 500000,
+      "value": { "min": 5000000, "likely": 15000000, "max": 35000000 },
+      "description": "Customer-facing web/mobile applications for banking and trading"
+    },
+    {
+      "id": "asset-007",
+      "name": "API Gateway & Integration Layer",
+      "type": "infrastructure",
+      "records": 0,
+      "value": { "min": 3000000, "likely": 8000000, "max": 18000000 },
+      "description": "API gateway handling partner integrations, open banking, and microservices"
+    },
+    {
+      "id": "asset-008",
+      "name": "Corporate Email & Communications",
+      "type": "system",
+      "records": 0,
+      "value": { "min": 1000000, "likely": 5000000, "max": 15000000 },
+      "description": "Microsoft 365, email, Teams, and executive communication channels"
+    }
+  ],
+
+  "controls": [
+    {
+      "id": "ctrl-001",
+      "name": "Endpoint Detection & Response (EDR)",
+      "category": "detective",
+      "effectiveness": { "min": 65, "likely": 78, "max": 92 },
+      "annual_cost": 280000,
+      "applies_to": ["scenario-001", "scenario-002", "scenario-005"],
+      "description": "CrowdStrike Falcon EDR deployed across all endpoints"
+    },
+    {
+      "id": "ctrl-002",
+      "name": "SIEM & SOC (24/7)",
+      "category": "detective",
+      "effectiveness": { "min": 55, "likely": 70, "max": 85 },
+      "annual_cost": 520000,
+      "applies_to": ["scenario-001", "scenario-002", "scenario-003", "scenario-005", "scenario-007"],
+      "description": "Splunk SIEM with 24/7 SOC monitoring and SOAR automation"
+    },
+    {
+      "id": "ctrl-003",
+      "name": "Multi-Factor Authentication (MFA)",
+      "category": "preventive",
+      "effectiveness": { "min": 75, "likely": 88, "max": 95 },
+      "annual_cost": 95000,
+      "applies_to": ["scenario-001", "scenario-002", "scenario-005", "scenario-008"],
+      "description": "Phishing-resistant MFA (FIDO2/WebAuthn) for all users"
+    },
+    {
+      "id": "ctrl-004",
+      "name": "Web Application Firewall (WAF)",
+      "category": "preventive",
+      "effectiveness": { "min": 55, "likely": 68, "max": 82 },
+      "annual_cost": 150000,
+      "applies_to": ["scenario-006", "scenario-007"],
+      "description": "AWS WAF + Cloudflare protecting web applications and APIs"
+    },
+    {
+      "id": "ctrl-005",
+      "name": "Backup & Disaster Recovery",
+      "category": "corrective",
+      "effectiveness": { "min": 70, "likely": 82, "max": 95 },
+      "annual_cost": 200000,
+      "applies_to": ["scenario-001", "scenario-003", "scenario-006"],
+      "description": "Immutable backups with 4-hour RTO, daily RPO, annual DR testing"
+    },
+    {
+      "id": "ctrl-006",
+      "name": "Email Security Gateway",
+      "category": "preventive",
+      "effectiveness": { "min": 60, "likely": 75, "max": 88 },
+      "annual_cost": 85000,
+      "applies_to": ["scenario-001", "scenario-008"],
+      "description": "Proofpoint email security with sandboxing and BEC detection"
+    },
+    {
+      "id": "ctrl-007",
+      "name": "Cloud Security Posture Management",
+      "category": "detective",
+      "effectiveness": { "min": 60, "likely": 72, "max": 85 },
+      "annual_cost": 180000,
+      "applies_to": ["scenario-003", "scenario-007"],
+      "description": "CSPM scanning AWS/Azure for misconfigurations and compliance drift"
+    },
+    {
+      "id": "ctrl-008",
+      "name": "Vulnerability Management",
+      "category": "preventive",
+      "effectiveness": { "min": 50, "likely": 65, "max": 80 },
+      "annual_cost": 160000,
+      "applies_to": ["scenario-001", "scenario-002", "scenario-004", "scenario-007"],
+      "description": "Qualys VMDR with SLA-driven patching (Critical: 72h, High: 7d)"
+    },
+    {
+      "id": "ctrl-009",
+      "name": "Security Awareness Training",
+      "category": "preventive",
+      "effectiveness": { "min": 30, "likely": 50, "max": 70 },
+      "annual_cost": 65000,
+      "applies_to": ["scenario-001", "scenario-005", "scenario-008"],
+      "description": "KnowBe4 phishing simulations and quarterly training for all staff"
+    },
+    {
+      "id": "ctrl-010",
+      "name": "Network Segmentation & Zero Trust",
+      "category": "preventive",
+      "effectiveness": { "min": 60, "likely": 75, "max": 90 },
+      "annual_cost": 350000,
+      "applies_to": ["scenario-001", "scenario-002", "scenario-005"],
+      "description": "Microsegmentation with Zscaler ZPA and Palo Alto NGFW"
+    },
+    {
+      "id": "ctrl-011",
+      "name": "Data Loss Prevention (DLP)",
+      "category": "detective",
+      "effectiveness": { "min": 45, "likely": 62, "max": 78 },
+      "annual_cost": 190000,
+      "applies_to": ["scenario-002", "scenario-005"],
+      "description": "Microsoft Purview DLP across endpoints, email, and cloud storage"
+    },
+    {
+      "id": "ctrl-012",
+      "name": "Incident Response Plan & Retainer",
+      "category": "corrective",
+      "effectiveness": { "min": 50, "likely": 68, "max": 85 },
+      "annual_cost": 120000,
+      "applies_to": ["scenario-001", "scenario-002", "scenario-003", "scenario-004", "scenario-005", "scenario-006", "scenario-007", "scenario-008"],
+      "description": "Documented IR playbooks, CrowdStrike IR retainer, quarterly tabletop exercises"
+    }
+  ],
+
+  "scenarios": [
+    {
+      "id": "scenario-001",
+      "name": "Ransomware Attack",
+      "description": "Organized criminal group deploys ransomware via phishing or exploited vulnerability, encrypting critical systems and exfiltrating data for double extortion.",
+      "threat_community": "organized_crime",
+      "asset_ids": ["asset-001", "asset-005"],
+      "contact_frequency": { "min": 12, "likely": 52, "max": 365 },
+      "probability_of_action": { "min": 0.05, "likely": 0.15, "max": 0.35 },
+      "threat_capability": { "min": 60, "likely": 75, "max": 90 },
+      "resistance_strength": { "min": 45, "likely": 62, "max": 78 },
+      "primary_loss": {
+        "productivity": { "min": 500000, "likely": 2000000, "max": 8000000 },
+        "response": { "min": 300000, "likely": 1500000, "max": 5000000 },
+        "replacement": { "min": 100000, "likely": 500000, "max": 2000000 }
+      },
+      "secondary_loss": {
+        "fines": { "min": 100000, "likely": 2000000, "max": 10000000 },
+        "reputation": { "min": 500000, "likely": 3000000, "max": 15000000 },
+        "competitive_advantage": { "min": 0, "likely": 500000, "max": 3000000 }
+      }
+    },
+    {
+      "id": "scenario-002",
+      "name": "Data Breach — Exfiltration by Nation-State",
+      "description": "Advanced persistent threat (APT) group targets intellectual property and customer data through spear-phishing and lateral movement.",
+      "threat_community": "nation_state",
+      "asset_ids": ["asset-001", "asset-002"],
+      "contact_frequency": { "min": 4, "likely": 12, "max": 52 },
+      "probability_of_action": { "min": 0.1, "likely": 0.3, "max": 0.6 },
+      "threat_capability": { "min": 75, "likely": 85, "max": 95 },
+      "resistance_strength": { "min": 50, "likely": 65, "max": 80 },
+      "primary_loss": {
+        "productivity": { "min": 200000, "likely": 800000, "max": 3000000 },
+        "response": { "min": 500000, "likely": 2000000, "max": 8000000 },
+        "replacement": { "min": 100000, "likely": 300000, "max": 1000000 }
+      },
+      "secondary_loss": {
+        "fines": { "min": 500000, "likely": 5000000, "max": 20000000 },
+        "reputation": { "min": 1000000, "likely": 5000000, "max": 25000000 },
+        "competitive_advantage": { "min": 500000, "likely": 3000000, "max": 15000000 }
+      }
+    },
+    {
+      "id": "scenario-003",
+      "name": "Cloud Misconfiguration Exploit",
+      "description": "Accidental misconfiguration of cloud resources (S3 buckets, IAM roles, security groups) leading to unauthorized data exposure or compute abuse.",
+      "threat_community": "insider_accidental",
+      "asset_ids": ["asset-003"],
+      "contact_frequency": { "min": 52, "likely": 200, "max": 365 },
+      "probability_of_action": { "min": 0.01, "likely": 0.05, "max": 0.15 },
+      "threat_capability": { "min": 15, "likely": 30, "max": 50 },
+      "resistance_strength": { "min": 35, "likely": 50, "max": 70 },
+      "primary_loss": {
+        "productivity": { "min": 50000, "likely": 200000, "max": 800000 },
+        "response": { "min": 100000, "likely": 400000, "max": 1500000 },
+        "replacement": { "min": 20000, "likely": 100000, "max": 500000 }
+      },
+      "secondary_loss": {
+        "fines": { "min": 50000, "likely": 500000, "max": 3000000 },
+        "reputation": { "min": 100000, "likely": 500000, "max": 2000000 },
+        "competitive_advantage": { "min": 0, "likely": 50000, "max": 500000 }
+      }
+    },
+    {
+      "id": "scenario-004",
+      "name": "Supply Chain Compromise",
+      "description": "Compromise of a third-party software vendor or open-source dependency used in the CI/CD pipeline, enabling code injection or backdoor deployment.",
+      "threat_community": "nation_state",
+      "asset_ids": ["asset-004"],
+      "contact_frequency": { "min": 2, "likely": 6, "max": 24 },
+      "probability_of_action": { "min": 0.05, "likely": 0.15, "max": 0.35 },
+      "threat_capability": { "min": 70, "likely": 82, "max": 95 },
+      "resistance_strength": { "min": 30, "likely": 48, "max": 65 },
+      "primary_loss": {
+        "productivity": { "min": 300000, "likely": 1500000, "max": 6000000 },
+        "response": { "min": 500000, "likely": 2500000, "max": 10000000 },
+        "replacement": { "min": 200000, "likely": 1000000, "max": 5000000 }
+      },
+      "secondary_loss": {
+        "fines": { "min": 200000, "likely": 2000000, "max": 8000000 },
+        "reputation": { "min": 1000000, "likely": 5000000, "max": 20000000 },
+        "competitive_advantage": { "min": 500000, "likely": 2000000, "max": 10000000 }
+      }
+    },
+    {
+      "id": "scenario-005",
+      "name": "Malicious Insider Threat",
+      "description": "Disgruntled or compromised employee with privileged access exfiltrates sensitive financial data or sabotages critical systems.",
+      "threat_community": "insider_malicious",
+      "asset_ids": ["asset-005", "asset-001"],
+      "contact_frequency": { "min": 52, "likely": 260, "max": 365 },
+      "probability_of_action": { "min": 0.005, "likely": 0.02, "max": 0.08 },
+      "threat_capability": { "min": 55, "likely": 70, "max": 85 },
+      "resistance_strength": { "min": 35, "likely": 52, "max": 70 },
+      "primary_loss": {
+        "productivity": { "min": 200000, "likely": 1000000, "max": 5000000 },
+        "response": { "min": 300000, "likely": 1200000, "max": 4000000 },
+        "replacement": { "min": 50000, "likely": 300000, "max": 1500000 }
+      },
+      "secondary_loss": {
+        "fines": { "min": 100000, "likely": 1000000, "max": 5000000 },
+        "reputation": { "min": 500000, "likely": 2000000, "max": 10000000 },
+        "competitive_advantage": { "min": 200000, "likely": 1500000, "max": 8000000 }
+      }
+    },
+    {
+      "id": "scenario-006",
+      "name": "DDoS Attack on Digital Banking",
+      "description": "Hacktivist or extortion-motivated DDoS attack targeting customer-facing digital banking and trading platforms during peak hours.",
+      "threat_community": "hacktivist",
+      "asset_ids": ["asset-006"],
+      "contact_frequency": { "min": 12, "likely": 52, "max": 200 },
+      "probability_of_action": { "min": 0.05, "likely": 0.2, "max": 0.5 },
+      "threat_capability": { "min": 35, "likely": 55, "max": 75 },
+      "resistance_strength": { "min": 50, "likely": 68, "max": 85 },
+      "primary_loss": {
+        "productivity": { "min": 100000, "likely": 500000, "max": 2000000 },
+        "response": { "min": 50000, "likely": 200000, "max": 800000 },
+        "replacement": { "min": 10000, "likely": 50000, "max": 200000 }
+      },
+      "secondary_loss": {
+        "fines": { "min": 0, "likely": 100000, "max": 500000 },
+        "reputation": { "min": 50000, "likely": 300000, "max": 1500000 },
+        "competitive_advantage": { "min": 0, "likely": 100000, "max": 500000 }
+      }
+    },
+    {
+      "id": "scenario-007",
+      "name": "API Exploit — Open Banking",
+      "description": "Exploitation of API vulnerabilities in open banking interfaces leading to unauthorized transactions, data exposure, or injection attacks.",
+      "threat_community": "organized_crime",
+      "asset_ids": ["asset-007", "asset-001"],
+      "contact_frequency": { "min": 52, "likely": 365, "max": 1000 },
+      "probability_of_action": { "min": 0.02, "likely": 0.08, "max": 0.2 },
+      "threat_capability": { "min": 55, "likely": 70, "max": 85 },
+      "resistance_strength": { "min": 45, "likely": 60, "max": 78 },
+      "primary_loss": {
+        "productivity": { "min": 50000, "likely": 300000, "max": 1200000 },
+        "response": { "min": 200000, "likely": 800000, "max": 3000000 },
+        "replacement": { "min": 50000, "likely": 200000, "max": 800000 }
+      },
+      "secondary_loss": {
+        "fines": { "min": 100000, "likely": 1000000, "max": 5000000 },
+        "reputation": { "min": 200000, "likely": 1000000, "max": 5000000 },
+        "competitive_advantage": { "min": 50000, "likely": 300000, "max": 2000000 }
+      }
+    },
+    {
+      "id": "scenario-008",
+      "name": "Business Email Compromise (BEC)",
+      "description": "Sophisticated social engineering targeting executives and finance staff to authorize fraudulent wire transfers or redirect payments.",
+      "threat_community": "organized_crime",
+      "asset_ids": ["asset-008", "asset-005"],
+      "contact_frequency": { "min": 52, "likely": 200, "max": 500 },
+      "probability_of_action": { "min": 0.02, "likely": 0.08, "max": 0.2 },
+      "threat_capability": { "min": 50, "likely": 68, "max": 85 },
+      "resistance_strength": { "min": 40, "likely": 58, "max": 75 },
+      "primary_loss": {
+        "productivity": { "min": 20000, "likely": 100000, "max": 500000 },
+        "response": { "min": 50000, "likely": 250000, "max": 1000000 },
+        "replacement": { "min": 10000, "likely": 50000, "max": 200000 }
+      },
+      "secondary_loss": {
+        "fines": { "min": 0, "likely": 200000, "max": 1000000 },
+        "reputation": { "min": 50000, "likely": 300000, "max": 1500000 },
+        "competitive_advantage": { "min": 0, "likely": 50000, "max": 300000 }
+      }
+    }
+  ]
+}
