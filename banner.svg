@@ -1,0 +1,302 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0e1a"/>
+      <stop offset="40%" stop-color="#0f1729"/>
+      <stop offset="100%" stop-color="#131b33"/>
+    </linearGradient>
+
+    <!-- Accent gradient -->
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="50%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+
+    <!-- Title gradient -->
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#f8fafc"/>
+    </linearGradient>
+
+    <!-- Gauge arc gradient -->
+    <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="40%" stop-color="#eab308"/>
+      <stop offset="70%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+
+    <!-- Glow filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <!-- Soft glow for circles -->
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <!-- Grid pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5" opacity="0.4"/>
+    </pattern>
+
+    <!-- Dot pattern -->
+    <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="0.6" fill="#334155" opacity="0.5"/>
+    </pattern>
+
+    <!-- Curve area gradient -->
+    <linearGradient id="curveArea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Bar gradients -->
+    <linearGradient id="barGreen" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22c55e" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#22c55e" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="barYellow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#eab308" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#eab308" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="barOrange" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f97316" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#f97316" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="barRed" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ef4444" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#ef4444" stop-opacity="0.4"/>
+    </linearGradient>
+
+    <!-- Card background -->
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="400" fill="url(#bg)"/>
+  <rect width="1200" height="400" fill="url(#grid)"/>
+  <rect width="1200" height="400" fill="url(#dots)"/>
+
+  <!-- Decorative background circles -->
+  <circle cx="950" cy="200" r="280" fill="#6366f1" opacity="0.02"/>
+  <circle cx="1000" cy="180" r="200" fill="#818cf8" opacity="0.03"/>
+  <circle cx="150" cy="350" r="180" fill="#6366f1" opacity="0.02"/>
+
+  <!-- Top accent line -->
+  <rect x="0" y="0" width="1200" height="3" fill="url(#accent)"/>
+
+  <!-- === LEFT SIDE: Text Content === -->
+
+  <!-- Shield icon -->
+  <g transform="translate(60, 65)">
+    <path d="M20 4 L4 10 L4 20 C4 31 12 40 20 44 C28 40 36 31 36 20 L36 10 Z"
+          fill="none" stroke="url(#accent)" stroke-width="2.5" opacity="0.9"/>
+    <path d="M15 21 L19 25 L27 15" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Dollar sign in shield -->
+    <text x="20" y="37" text-anchor="middle" fill="#6366f1" font-family="Segoe UI, system-ui, sans-serif" font-size="9" font-weight="600" opacity="0.5">$</text>
+  </g>
+
+  <!-- Badge -->
+  <rect x="60" y="56" width="160" height="22" rx="11" fill="#6366f1" opacity="0.15" stroke="#6366f1" stroke-width="0.8" stroke-opacity="0.4"/>
+  <text x="140" y="71" text-anchor="middle" fill="#818cf8" font-family="Segoe UI, system-ui, sans-serif" font-size="10" font-weight="600" letter-spacing="1.5">FAIR MODEL ENGINE</text>
+
+  <!-- Main title -->
+  <text x="60" y="128" fill="url(#titleGrad)" font-family="Segoe UI, system-ui, sans-serif" font-size="42" font-weight="700" letter-spacing="-0.5">Cyber Risk</text>
+  <text x="60" y="175" fill="url(#accent)" font-family="Segoe UI, system-ui, sans-serif" font-size="42" font-weight="700" letter-spacing="-0.5">Quantification</text>
+
+  <!-- Subtitle -->
+  <text x="60" y="210" fill="#94a3b8" font-family="Segoe UI, system-ui, sans-serif" font-size="15" font-weight="400">Monte Carlo simulation for quantifying cyber risk in financial terms</text>
+
+  <!-- Feature pills -->
+  <g transform="translate(60, 235)">
+    <!-- FAIR Model -->
+    <rect x="0" y="0" width="95" height="26" rx="13" fill="#1e293b" stroke="#334155" stroke-width="0.8"/>
+    <text x="47" y="17" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, system-ui, sans-serif" font-size="10" font-weight="500">FAIR Model</text>
+
+    <!-- Monte Carlo -->
+    <rect x="105" y="0" width="105" height="26" rx="13" fill="#1e293b" stroke="#334155" stroke-width="0.8"/>
+    <text x="157" y="17" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, system-ui, sans-serif" font-size="10" font-weight="500">Monte Carlo</text>
+
+    <!-- PERT Sampling -->
+    <rect x="220" y="0" width="110" height="26" rx="13" fill="#1e293b" stroke="#334155" stroke-width="0.8"/>
+    <text x="275" y="17" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, system-ui, sans-serif" font-size="10" font-weight="500">PERT Sampling</text>
+
+    <!-- Zero Dependencies -->
+    <rect x="340" y="0" width="130" height="26" rx="13" fill="#1e293b" stroke="#334155" stroke-width="0.8"/>
+    <text x="405" y="17" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, system-ui, sans-serif" font-size="10" font-weight="500">Zero Dependencies</text>
+  </g>
+
+  <!-- Stats row -->
+  <g transform="translate(60, 290)">
+    <!-- 10K iterations -->
+    <text x="0" y="14" fill="#e2e8f0" font-family="Segoe UI, system-ui, sans-serif" font-size="22" font-weight="700">10K</text>
+    <text x="0" y="30" fill="#64748b" font-family="Segoe UI, system-ui, sans-serif" font-size="9" font-weight="500" letter-spacing="0.5">ITERATIONS</text>
+
+    <!-- 8 Scenarios -->
+    <text x="100" y="14" fill="#e2e8f0" font-family="Segoe UI, system-ui, sans-serif" font-size="22" font-weight="700">8</text>
+    <text x="100" y="30" fill="#64748b" font-family="Segoe UI, system-ui, sans-serif" font-size="9" font-weight="500" letter-spacing="0.5">SCENARIOS</text>
+
+    <!-- 7 Percentiles -->
+    <text x="185" y="14" fill="#e2e8f0" font-family="Segoe UI, system-ui, sans-serif" font-size="22" font-weight="700">7</text>
+    <text x="185" y="30" fill="#64748b" font-family="Segoe UI, system-ui, sans-serif" font-size="9" font-weight="500" letter-spacing="0.5">PERCENTILES</text>
+
+    <!-- 12 Controls -->
+    <text x="290" y="14" fill="#e2e8f0" font-family="Segoe UI, system-ui, sans-serif" font-size="22" font-weight="700">12</text>
+    <text x="290" y="30" fill="#64748b" font-family="Segoe UI, system-ui, sans-serif" font-size="9" font-weight="500" letter-spacing="0.5">CONTROLS</text>
+
+    <!-- $0 Cost -->
+    <text x="390" y="14" fill="#22c55e" font-family="Segoe UI, system-ui, sans-serif" font-size="22" font-weight="700">$0</text>
+    <text x="390" y="30" fill="#64748b" font-family="Segoe UI, system-ui, sans-serif" font-size="9" font-weight="500" letter-spacing="0.5">COST</text>
+  </g>
+
+  <!-- Python + MIT badges -->
+  <g transform="translate(60, 348)">
+    <rect x="0" y="0" width="80" height="22" rx="4" fill="#1e3a5f" stroke="#2563eb" stroke-width="0.6" stroke-opacity="0.5"/>
+    <text x="40" y="15" text-anchor="middle" fill="#60a5fa" font-family="Segoe UI, system-ui, sans-serif" font-size="10" font-weight="600">Python 3.10+</text>
+
+    <rect x="90" y="0" width="50" height="22" rx="4" fill="#14532d" stroke="#22c55e" stroke-width="0.6" stroke-opacity="0.5"/>
+    <text x="115" y="15" text-anchor="middle" fill="#4ade80" font-family="Segoe UI, system-ui, sans-serif" font-size="10" font-weight="600">MIT</text>
+
+    <rect x="150" y="0" width="55" height="22" rx="4" fill="#3b0764" stroke="#a855f7" stroke-width="0.6" stroke-opacity="0.5"/>
+    <text x="177" y="15" text-anchor="middle" fill="#c084fc" font-family="Segoe UI, system-ui, sans-serif" font-size="10" font-weight="600">FAIR</text>
+  </g>
+
+  <!-- === RIGHT SIDE: Dashboard Visualization === -->
+
+  <!-- Card 1: Risk Gauge -->
+  <g transform="translate(555, 40)">
+    <rect width="200" height="170" rx="10" fill="url(#cardBg)" stroke="#1e293b" stroke-width="1"/>
+    <text x="15" y="25" fill="#94a3b8" font-family="Segoe UI, system-ui, sans-serif" font-size="10" font-weight="600" letter-spacing="0.5">RISK SCORE</text>
+
+    <!-- Gauge -->
+    <g transform="translate(100, 105)">
+      <!-- Background arc -->
+      <path d="M -52 30 A 60 60 0 1 1 52 30" fill="none" stroke="#1e293b" stroke-width="10" stroke-linecap="round"/>
+      <!-- Colored arc (showing ~75/100) -->
+      <path d="M -52 30 A 60 60 0 1 1 40 -45" fill="none" stroke="url(#gaugeGrad)" stroke-width="10" stroke-linecap="round" filter="url(#glow)"/>
+      <!-- Score text -->
+      <text x="0" y="0" text-anchor="middle" fill="#f8fafc" font-family="Segoe UI, system-ui, sans-serif" font-size="28" font-weight="700">87.7</text>
+      <text x="0" y="18" text-anchor="middle" fill="#ef4444" font-family="Segoe UI, system-ui, sans-serif" font-size="10" font-weight="600">CRITICAL</text>
+    </g>
+  </g>
+
+  <!-- Card 2: Loss Exceedance Curve -->
+  <g transform="translate(770, 40)">
+    <rect width="370" height="170" rx="10" fill="url(#cardBg)" stroke="#1e293b" stroke-width="1"/>
+    <text x="15" y="25" fill="#94a3b8" font-family="Segoe UI, system-ui, sans-serif" font-size="10" font-weight="600" letter-spacing="0.5">LOSS EXCEEDANCE CURVE</text>
+
+    <!-- Axes -->
+    <line x1="45" y1="40" x2="45" y2="145" stroke="#334155" stroke-width="0.8"/>
+    <line x1="45" y1="145" x2="350" y2="145" stroke="#334155" stroke-width="0.8"/>
+
+    <!-- Y axis labels -->
+    <text x="40" y="47" text-anchor="end" fill="#475569" font-family="Segoe UI, system-ui, sans-serif" font-size="8">100%</text>
+    <text x="40" y="97" text-anchor="end" fill="#475569" font-family="Segoe UI, system-ui, sans-serif" font-size="8">50%</text>
+    <text x="40" y="148" text-anchor="end" fill="#475569" font-family="Segoe UI, system-ui, sans-serif" font-size="8">0%</text>
+
+    <!-- X axis labels -->
+    <text x="45" y="158" text-anchor="start" fill="#475569" font-family="Segoe UI, system-ui, sans-serif" font-size="8">$0</text>
+    <text x="197" y="158" text-anchor="middle" fill="#475569" font-family="Segoe UI, system-ui, sans-serif" font-size="8">$250M</text>
+    <text x="350" y="158" text-anchor="end" fill="#475569" font-family="Segoe UI, system-ui, sans-serif" font-size="8">$500M</text>
+
+    <!-- Grid lines -->
+    <line x1="45" y1="70" x2="350" y2="70" stroke="#1e293b" stroke-width="0.5"/>
+    <line x1="45" y1="95" x2="350" y2="95" stroke="#1e293b" stroke-width="0.5"/>
+    <line x1="45" y1="120" x2="350" y2="120" stroke="#1e293b" stroke-width="0.5"/>
+
+    <!-- Curve fill -->
+    <polygon points="45,42 65,43 90,45 115,48 140,53 165,60 190,70 215,82 240,96 265,110 290,124 315,135 340,142 350,145 45,145"
+             fill="url(#curveArea)"/>
+
+    <!-- Curve line -->
+    <polyline points="45,42 65,43 90,45 115,48 140,53 165,60 190,70 215,82 240,96 265,110 290,124 315,135 340,142"
+              fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+
+    <!-- P90 marker -->
+    <line x1="280" y1="40" x2="280" y2="145" stroke="#ef4444" stroke-width="0.8" stroke-dasharray="3,3" opacity="0.6"/>
+    <text x="280" y="38" text-anchor="middle" fill="#ef4444" font-family="Segoe UI, system-ui, sans-serif" font-size="8" font-weight="600">P90</text>
+
+    <!-- P50 marker -->
+    <line x1="175" y1="40" x2="175" y2="145" stroke="#eab308" stroke-width="0.8" stroke-dasharray="3,3" opacity="0.6"/>
+    <text x="175" y="38" text-anchor="middle" fill="#eab308" font-family="Segoe UI, system-ui, sans-serif" font-size="8" font-weight="600">P50</text>
+  </g>
+
+  <!-- Card 3: ALE Summary -->
+  <g transform="translate(555, 225)">
+    <rect width="200" height="155" rx="10" fill="url(#cardBg)" stroke="#1e293b" stroke-width="1"/>
+    <text x="15" y="25" fill="#94a3b8" font-family="Segoe UI, system-ui, sans-serif" font-size="10" font-weight="600" letter-spacing="0.5">ANNUALIZED LOSS</text>
+
+    <!-- P50 -->
+    <text x="15" y="52" fill="#64748b" font-family="Segoe UI, system-ui, sans-serif" font-size="9">Expected (P50)</text>
+    <text x="185" y="52" text-anchor="end" fill="#e2e8f0" font-family="Segoe UI, system-ui, sans-serif" font-size="13" font-weight="600">$209M</text>
+
+    <!-- Divider -->
+    <line x1="15" y1="62" x2="185" y2="62" stroke="#1e293b" stroke-width="0.5"/>
+
+    <!-- P90 -->
+    <text x="15" y="82" fill="#64748b" font-family="Segoe UI, system-ui, sans-serif" font-size="9">Likely Max (P90)</text>
+    <text x="185" y="82" text-anchor="end" fill="#f97316" font-family="Segoe UI, system-ui, sans-serif" font-size="13" font-weight="600">$507M</text>
+
+    <!-- Divider -->
+    <line x1="15" y1="92" x2="185" y2="92" stroke="#1e293b" stroke-width="0.5"/>
+
+    <!-- P95 -->
+    <text x="15" y="112" fill="#64748b" font-family="Segoe UI, system-ui, sans-serif" font-size="9">Worst Case (P95)</text>
+    <text x="185" y="112" text-anchor="end" fill="#ef4444" font-family="Segoe UI, system-ui, sans-serif" font-size="13" font-weight="600">$638M</text>
+
+    <!-- Divider -->
+    <line x1="15" y1="122" x2="185" y2="122" stroke="#1e293b" stroke-width="0.5"/>
+
+    <!-- % Revenue -->
+    <text x="15" y="142" fill="#64748b" font-family="Segoe UI, system-ui, sans-serif" font-size="9">% of Revenue (P90)</text>
+    <text x="185" y="142" text-anchor="end" fill="#ef4444" font-family="Segoe UI, system-ui, sans-serif" font-size="13" font-weight="700">101.4%</text>
+  </g>
+
+  <!-- Card 4: Control Effectiveness -->
+  <g transform="translate(770, 225)">
+    <rect width="370" height="155" rx="10" fill="url(#cardBg)" stroke="#1e293b" stroke-width="1"/>
+    <text x="15" y="25" fill="#94a3b8" font-family="Segoe UI, system-ui, sans-serif" font-size="10" font-weight="600" letter-spacing="0.5">CONTROL EFFECTIVENESS &amp; ROI</text>
+
+    <!-- MFA -->
+    <text x="15" y="50" fill="#94a3b8" font-family="Segoe UI, system-ui, sans-serif" font-size="9">MFA (FIDO2)</text>
+    <rect x="110" y="40" width="200" height="12" rx="3" fill="#1e293b"/>
+    <rect x="110" y="40" width="176" height="12" rx="3" fill="url(#barGreen)"/>
+    <text x="320" y="50" fill="#22c55e" font-family="Segoe UI, system-ui, sans-serif" font-size="9" font-weight="600">88% | 233x</text>
+
+    <!-- SIEM/SOC -->
+    <text x="15" y="74" fill="#94a3b8" font-family="Segoe UI, system-ui, sans-serif" font-size="9">SIEM &amp; SOC</text>
+    <rect x="110" y="64" width="200" height="12" rx="3" fill="#1e293b"/>
+    <rect x="110" y="64" width="140" height="12" rx="3" fill="url(#barGreen)"/>
+    <text x="320" y="74" fill="#22c55e" font-family="Segoe UI, system-ui, sans-serif" font-size="9" font-weight="600">70% | 44x</text>
+
+    <!-- EDR -->
+    <text x="15" y="98" fill="#94a3b8" font-family="Segoe UI, system-ui, sans-serif" font-size="9">EDR (Falcon)</text>
+    <rect x="110" y="88" width="200" height="12" rx="3" fill="#1e293b"/>
+    <rect x="110" y="88" width="156" height="12" rx="3" fill="url(#barGreen)"/>
+    <text x="320" y="98" fill="#22c55e" font-family="Segoe UI, system-ui, sans-serif" font-size="9" font-weight="600">78% | 66x</text>
+
+    <!-- Vuln Mgmt -->
+    <text x="15" y="122" fill="#94a3b8" font-family="Segoe UI, system-ui, sans-serif" font-size="9">Vuln Mgmt</text>
+    <rect x="110" y="112" width="200" height="12" rx="3" fill="#1e293b"/>
+    <rect x="110" y="112" width="130" height="12" rx="3" fill="url(#barYellow)"/>
+    <text x="320" y="122" fill="#eab308" font-family="Segoe UI, system-ui, sans-serif" font-size="9" font-weight="600">65% | 132x</text>
+
+    <!-- Network Seg -->
+    <text x="15" y="146" fill="#94a3b8" font-family="Segoe UI, system-ui, sans-serif" font-size="9">Zero Trust</text>
+    <rect x="110" y="136" width="200" height="12" rx="3" fill="#1e293b"/>
+    <rect x="110" y="136" width="150" height="12" rx="3" fill="url(#barGreen)"/>
+    <text x="320" y="146" fill="#22c55e" font-family="Segoe UI, system-ui, sans-serif" font-size="9" font-weight="600">75% | 51x</text>
+  </g>
+
+  <!-- Bottom accent line -->
+  <rect x="0" y="397" width="1200" height="3" fill="url(#accent)"/>
+</svg>

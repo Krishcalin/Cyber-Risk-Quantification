@@ -1,10 +1,12 @@
-# Cyber Risk Quantification (CRQ) Engine
+<p align="center">
+  <img src="banner.svg" alt="CRQ Engine — FAIR-Based Cyber Risk Quantification" width="100%">
+</p>
 
-**FAIR-based Monte Carlo simulation platform for quantifying cyber risk in financial terms.**
-
-[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![FAIR](https://img.shields.io/badge/Model-FAIR-purple.svg)](https://www.fairinstitute.org/)
+<p align="center">
+  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10+-blue.svg" alt="Python"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License"></a>
+  <a href="https://www.fairinstitute.org/"><img src="https://img.shields.io/badge/Model-FAIR-purple.svg" alt="FAIR"></a>
+</p>
 
 ## Overview
 
