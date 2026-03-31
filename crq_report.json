@@ -1,0 +1,1141 @@
+{
+  "meta": {
+    "engine": "CRQ Engine",
+    "version": "1.0.0",
+    "model": "FAIR (Factor Analysis of Information Risk)",
+    "simulations": 10000,
+    "generated": "2026-03-31T02:22:21Z"
+  },
+  "organization": {
+    "name": "Acme Financial Corp",
+    "revenue": 500000000,
+    "employees": 5000,
+    "industry": "financial_services",
+    "headquarters": "Amsterdam, Netherlands"
+  },
+  "summary": {
+    "organization": "Acme Financial Corp",
+    "revenue": 500000000,
+    "total_scenarios": 8,
+    "total_ale_p50": 212089229.28863138,
+    "total_ale_p90": 512640718.3895093,
+    "total_ale_p95": 638748248.6622362,
+    "highest_risk_score": 87.8,
+    "critical_count": 5,
+    "high_count": 2,
+    "medium_count": 0,
+    "low_count": 1
+  },
+  "scenarios": [
+    {
+      "id": "scenario-001",
+      "name": "Ransomware Attack",
+      "severity": "CRITICAL",
+      "risk_score": 87.8,
+      "iterations": 10000,
+      "ale": {
+        "mean": 79749386.3,
+        "std": 63713146.12,
+        "percentiles": {
+          "5": 14327253.09,
+          "10": 19647151.62,
+          "25": 34546133.79,
+          "50": 62643229.1,
+          "75": 104829280.9,
+          "90": 162571126.16,
+          "95": 207090342.98
+        }
+      },
+      "lef": {
+        "mean": 4.488
+      },
+      "loss_magnitude": {
+        "mean": 17773987.91,
+        "primary_breakdown": {
+          "productivity": 2754649.32,
+          "response": 1887086.05,
+          "replacement": 684613.47
+        },
+        "secondary_breakdown": {
+          "fines": 2992981.91,
+          "reputation": 4518599.66,
+          "competitive_advantage": 834367.98
+        }
+      },
+      "loss_exceedance_curve": [
+        {
+          "threshold": 0.0,
+          "probability": 1.0
+        },
+        {
+          "threshold": 31476134.01,
+          "probability": 0.7832
+        },
+        {
+          "threshold": 62952268.03,
+          "probability": 0.4969
+        },
+        {
+          "threshold": 94428402.04,
+          "probability": 0.2979
+        },
+        {
+          "threshold": 125904536.05,
+          "probability": 0.1809
+        },
+        {
+          "threshold": 157380670.07,
+          "probability": 0.1092
+        },
+        {
+          "threshold": 188856804.08,
+          "probability": 0.0655
+        },
+        {
+          "threshold": 220332938.09,
+          "probability": 0.0417
+        },
+        {
+          "threshold": 251809072.11,
+          "probability": 0.0237
+        },
+        {
+          "threshold": 283285206.12,
+          "probability": 0.015
+        },
+        {
+          "threshold": 314761340.13,
+          "probability": 0.0089
+        },
+        {
+          "threshold": 346237474.15,
+          "probability": 0.0054
+        },
+        {
+          "threshold": 377713608.16,
+          "probability": 0.0038
+        },
+        {
+          "threshold": 409189742.17,
+          "probability": 0.0016
+        },
+        {
+          "threshold": 440665876.19,
+          "probability": 0.0006
+        },
+        {
+          "threshold": 472142010.2,
+          "probability": 0.0003
+        },
+        {
+          "threshold": 503618144.21,
+          "probability": 0.0002
+        },
+        {
+          "threshold": 535094278.23,
+          "probability": 0.0002
+        },
+        {
+          "threshold": 566570412.24,
+          "probability": 0.0002
+        },
+        {
+          "threshold": 598046546.25,
+          "probability": 0.0001
+        },
+        {
+          "threshold": 629522680.27,
+          "probability": 0.0
+        }
+      ]
+    },
+    {
+      "id": "scenario-007",
+      "name": "API Exploit — Open Banking",
+      "severity": "CRITICAL",
+      "risk_score": 84.2,
+      "iterations": 10000,
+      "ale": {
+        "mean": 59623194.66,
+        "std": 42617986.84,
+        "percentiles": {
+          "5": 12784230.29,
+          "10": 17781027.39,
+          "25": 29266517.55,
+          "50": 48601716.5,
+          "75": 78321482.64,
+          "90": 116443793.26,
+          "95": 144159380.53
+        }
+      },
+      "lef": {
+        "mean": 8.5892
+      },
+      "loss_magnitude": {
+        "mean": 6943649.74,
+        "primary_breakdown": {
+          "productivity": 408675.55,
+          "response": 1071041.13,
+          "replacement": 274530.1
+        },
+        "secondary_breakdown": {
+          "fines": 1516984.41,
+          "reputation": 1523460.2,
+          "competitive_advantage": 546577.64
+        }
+      },
+      "loss_exceedance_curve": [
+        {
+          "threshold": 0.0,
+          "probability": 1.0
+        },
+        {
+          "threshold": 20347278.5,
+          "probability": 0.867
+        },
+        {
+          "threshold": 40694556.99,
+          "probability": 0.5989
+        },
+        {
+          "threshold": 61041835.49,
+          "probability": 0.3744
+        },
+        {
+          "threshold": 81389113.99,
+          "probability": 0.2324
+        },
+        {
+          "threshold": 101736392.48,
+          "probability": 0.1421
+        },
+        {
+          "threshold": 122083670.98,
+          "probability": 0.0874
+        },
+        {
+          "threshold": 142430949.48,
+          "probability": 0.0514
+        },
+        {
+          "threshold": 162778227.97,
+          "probability": 0.03
+        },
+        {
+          "threshold": 183125506.47,
+          "probability": 0.0186
+        },
+        {
+          "threshold": 203472784.97,
+          "probability": 0.0099
+        },
+        {
+          "threshold": 223820063.46,
+          "probability": 0.0059
+        },
+        {
+          "threshold": 244167341.96,
+          "probability": 0.0034
+        },
+        {
+          "threshold": 264514620.45,
+          "probability": 0.0023
+        },
+        {
+          "threshold": 284861898.95,
+          "probability": 0.0013
+        },
+        {
+          "threshold": 305209177.45,
+          "probability": 0.0005
+        },
+        {
+          "threshold": 325556455.94,
+          "probability": 0.0003
+        },
+        {
+          "threshold": 345903734.44,
+          "probability": 0.0003
+        },
+        {
+          "threshold": 366251012.94,
+          "probability": 0.0002
+        },
+        {
+          "threshold": 386598291.43,
+          "probability": 0.0002
+        },
+        {
+          "threshold": 406945569.93,
+          "probability": 0.0
+        }
+      ]
+    },
+    {
+      "id": "scenario-002",
+      "name": "Data Breach — Exfiltration by Nation-State",
+      "severity": "CRITICAL",
+      "risk_score": 83.8,
+      "iterations": 10000,
+      "ale": {
+        "mean": 60175431.65,
+        "std": 39791936.52,
+        "percentiles": {
+          "5": 15883493.2,
+          "10": 20548659.55,
+          "25": 31432499.34,
+          "50": 50467094.39,
+          "75": 77914210.28,
+          "90": 112876713.39,
+          "95": 137017182.41
+        }
+      },
+      "lef": {
+        "mean": 1.9953
+      },
+      "loss_magnitude": {
+        "mean": 30115583.52,
+        "primary_breakdown": {
+          "productivity": 1073962.71,
+          "response": 2734829.68,
+          "replacement": 382480.43
+        },
+        "secondary_breakdown": {
+          "fines": 6737832.19,
+          "reputation": 7664311.31,
+          "competitive_advantage": 4572417.15
+        }
+      },
+      "loss_exceedance_curve": [
+        {
+          "threshold": 0.0,
+          "probability": 1.0
+        },
+        {
+          "threshold": 16902492.86,
+          "probability": 0.9411
+        },
+        {
+          "threshold": 33804985.73,
+          "probability": 0.7195
+        },
+        {
+          "threshold": 50707478.59,
+          "probability": 0.4976
+        },
+        {
+          "threshold": 67609971.46,
+          "probability": 0.3288
+        },
+        {
+          "threshold": 84512464.32,
+          "probability": 0.208
+        },
+        {
+          "threshold": 101414957.19,
+          "probability": 0.1337
+        },
+        {
+          "threshold": 118317450.05,
+          "probability": 0.0847
+        },
+        {
+          "threshold": 135219942.92,
+          "probability": 0.0533
+        },
+        {
+          "threshold": 152122435.78,
+          "probability": 0.0338
+        },
+        {
+          "threshold": 169024928.65,
+          "probability": 0.0227
+        },
+        {
+          "threshold": 185927421.51,
+          "probability": 0.0124
+        },
+        {
+          "threshold": 202829914.38,
+          "probability": 0.0086
+        },
+        {
+          "threshold": 219732407.24,
+          "probability": 0.0052
+        },
+        {
+          "threshold": 236634900.1,
+          "probability": 0.0034
+        },
+        {
+          "threshold": 253537392.97,
+          "probability": 0.002
+        },
+        {
+          "threshold": 270439885.83,
+          "probability": 0.0012
+        },
+        {
+          "threshold": 287342378.7,
+          "probability": 0.0008
+        },
+        {
+          "threshold": 304244871.56,
+          "probability": 0.0005
+        },
+        {
+          "threshold": 321147364.43,
+          "probability": 0.0002
+        },
+        {
+          "threshold": 338049857.29,
+          "probability": 0.0
+        }
+      ]
+    },
+    {
+      "id": "scenario-005",
+      "name": "Malicious Insider Threat",
+      "severity": "CRITICAL",
+      "risk_score": 74.7,
+      "iterations": 10000,
+      "ale": {
+        "mean": 25539031.84,
+        "std": 17753230.32,
+        "percentiles": {
+          "5": 5960522.01,
+          "10": 7967012.68,
+          "25": 12938774.48,
+          "50": 21285934.59,
+          "75": 33312094.15,
+          "90": 48836328.83,
+          "95": 60003462.61
+        }
+      },
+      "lef": {
+        "mean": 1.8728
+      },
+      "loss_magnitude": {
+        "mean": 13647658.21,
+        "primary_breakdown": {
+          "productivity": 1530484.84,
+          "response": 1526619.2,
+          "replacement": 457360.27
+        },
+        "secondary_breakdown": {
+          "fines": 1508806.9,
+          "reputation": 3116583.1,
+          "competitive_advantage": 2358344.32
+        }
+      },
+      "loss_exceedance_curve": [
+        {
+          "threshold": 0.0,
+          "probability": 1.0
+        },
+        {
+          "threshold": 9172706.79,
+          "probability": 0.8658
+        },
+        {
+          "threshold": 18345413.57,
+          "probability": 0.5767
+        },
+        {
+          "threshold": 27518120.36,
+          "probability": 0.3495
+        },
+        {
+          "threshold": 36690827.14,
+          "probability": 0.2035
+        },
+        {
+          "threshold": 45863533.93,
+          "probability": 0.12
+        },
+        {
+          "threshold": 55036240.71,
+          "probability": 0.0675
+        },
+        {
+          "threshold": 64208947.5,
+          "probability": 0.0398
+        },
+        {
+          "threshold": 73381654.28,
+          "probability": 0.0219
+        },
+        {
+          "threshold": 82554361.07,
+          "probability": 0.0135
+        },
+        {
+          "threshold": 91727067.85,
+          "probability": 0.008
+        },
+        {
+          "threshold": 100899774.64,
+          "probability": 0.0038
+        },
+        {
+          "threshold": 110072481.42,
+          "probability": 0.0022
+        },
+        {
+          "threshold": 119245188.21,
+          "probability": 0.0012
+        },
+        {
+          "threshold": 128417894.99,
+          "probability": 0.0006
+        },
+        {
+          "threshold": 137590601.78,
+          "probability": 0.0003
+        },
+        {
+          "threshold": 146763308.56,
+          "probability": 0.0002
+        },
+        {
+          "threshold": 155936015.35,
+          "probability": 0.0002
+        },
+        {
+          "threshold": 165108722.14,
+          "probability": 0.0002
+        },
+        {
+          "threshold": 174281428.92,
+          "probability": 0.0002
+        },
+        {
+          "threshold": 183454135.71,
+          "probability": 0.0
+        }
+      ]
+    },
+    {
+      "id": "scenario-004",
+      "name": "Supply Chain Compromise",
+      "severity": "CRITICAL",
+      "risk_score": 73.3,
+      "iterations": 10000,
+      "ale": {
+        "mean": 22702461.74,
+        "std": 14879790.71,
+        "percentiles": {
+          "5": 6046532.13,
+          "10": 7790117.27,
+          "25": 11897041.21,
+          "50": 19121597.08,
+          "75": 29493252.89,
+          "90": 42718631.37,
+          "95": 52111350.18
+        }
+      },
+      "lef": {
+        "mean": 0.8907
+      },
+      "loss_magnitude": {
+        "mean": 25490226.12,
+        "primary_breakdown": {
+          "productivity": 2042426.18,
+          "response": 3417949.91,
+          "replacement": 1541246.55
+        },
+        "secondary_breakdown": {
+          "fines": 2708888.56,
+          "reputation": 6820674.77,
+          "competitive_advantage": 3076680.27
+        }
+      },
+      "loss_exceedance_curve": [
+        {
+          "threshold": 0.0,
+          "probability": 1.0
+        },
+        {
+          "threshold": 6595528.16,
+          "probability": 0.935
+        },
+        {
+          "threshold": 13191056.31,
+          "probability": 0.6999
+        },
+        {
+          "threshold": 19786584.47,
+          "probability": 0.4811
+        },
+        {
+          "threshold": 26382112.63,
+          "probability": 0.3058
+        },
+        {
+          "threshold": 32977640.78,
+          "probability": 0.1981
+        },
+        {
+          "threshold": 39573168.94,
+          "probability": 0.1264
+        },
+        {
+          "threshold": 46168697.1,
+          "probability": 0.076
+        },
+        {
+          "threshold": 52764225.25,
+          "probability": 0.0472
+        },
+        {
+          "threshold": 59359753.41,
+          "probability": 0.0294
+        },
+        {
+          "threshold": 65955281.57,
+          "probability": 0.0171
+        },
+        {
+          "threshold": 72550809.72,
+          "probability": 0.0094
+        },
+        {
+          "threshold": 79146337.88,
+          "probability": 0.0059
+        },
+        {
+          "threshold": 85741866.03,
+          "probability": 0.0031
+        },
+        {
+          "threshold": 92337394.19,
+          "probability": 0.0017
+        },
+        {
+          "threshold": 98932922.35,
+          "probability": 0.0011
+        },
+        {
+          "threshold": 105528450.5,
+          "probability": 0.0008
+        },
+        {
+          "threshold": 112123978.66,
+          "probability": 0.0005
+        },
+        {
+          "threshold": 118719506.82,
+          "probability": 0.0004
+        },
+        {
+          "threshold": 125315034.97,
+          "probability": 0.0002
+        },
+        {
+          "threshold": 131910563.13,
+          "probability": 0.0
+        }
+      ]
+    },
+    {
+      "id": "scenario-008",
+      "name": "Business Email Compromise (BEC)",
+      "severity": "HIGH",
+      "risk_score": 63.3,
+      "iterations": 10000,
+      "ale": {
+        "mean": 8793177.12,
+        "std": 6400870.42,
+        "percentiles": {
+          "5": 1890615.73,
+          "10": 2587453.02,
+          "25": 4271467.03,
+          "50": 7154519.14,
+          "75": 11548430.63,
+          "90": 17092269.98,
+          "95": 21298804.12
+        }
+      },
+      "lef": {
+        "mean": 4.824
+      },
+      "loss_magnitude": {
+        "mean": 1819984.1,
+        "primary_breakdown": {
+          "productivity": 152740.36,
+          "response": 339582.85,
+          "replacement": 68090.3
+        },
+        "secondary_breakdown": {
+          "fines": 299732.4,
+          "reputation": 456436.54,
+          "competitive_advantage": 83405.32
+        }
+      },
+      "loss_exceedance_curve": [
+        {
+          "threshold": 0.0,
+          "probability": 1.0
+        },
+        {
+          "threshold": 2855708.89,
+          "probability": 0.8749
+        },
+        {
+          "threshold": 5711417.77,
+          "probability": 0.6191
+        },
+        {
+          "threshold": 8567126.66,
+          "probability": 0.4024
+        },
+        {
+          "threshold": 11422835.55,
+          "probability": 0.2545
+        },
+        {
+          "threshold": 14278544.43,
+          "probability": 0.1589
+        },
+        {
+          "threshold": 17134253.32,
+          "probability": 0.0994
+        },
+        {
+          "threshold": 19989962.21,
+          "probability": 0.0629
+        },
+        {
+          "threshold": 22845671.09,
+          "probability": 0.0377
+        },
+        {
+          "threshold": 25701379.98,
+          "probability": 0.0227
+        },
+        {
+          "threshold": 28557088.87,
+          "probability": 0.0152
+        },
+        {
+          "threshold": 31412797.75,
+          "probability": 0.01
+        },
+        {
+          "threshold": 34268506.64,
+          "probability": 0.0069
+        },
+        {
+          "threshold": 37124215.53,
+          "probability": 0.0043
+        },
+        {
+          "threshold": 39979924.41,
+          "probability": 0.0023
+        },
+        {
+          "threshold": 42835633.3,
+          "probability": 0.0016
+        },
+        {
+          "threshold": 45691342.18,
+          "probability": 0.0009
+        },
+        {
+          "threshold": 48547051.07,
+          "probability": 0.0003
+        },
+        {
+          "threshold": 51402759.96,
+          "probability": 0.0002
+        },
+        {
+          "threshold": 54258468.84,
+          "probability": 0.0001
+        },
+        {
+          "threshold": 57114177.73,
+          "probability": 0.0
+        }
+      ]
+    },
+    {
+      "id": "scenario-006",
+      "name": "DDoS Attack on Digital Banking",
+      "severity": "HIGH",
+      "risk_score": 57.8,
+      "iterations": 10000,
+      "ale": {
+        "mean": 4265135.22,
+        "std": 4787239.41,
+        "percentiles": {
+          "5": 0.0,
+          "10": 0.0,
+          "25": 988640.5,
+          "50": 2815138.5,
+          "75": 5915652.9,
+          "90": 10210168.28,
+          "95": 13620856.49
+        }
+      },
+      "lef": {
+        "mean": 1.8306
+      },
+      "loss_magnitude": {
+        "mean": 2326175.78,
+        "primary_breakdown": {
+          "productivity": 686819.87,
+          "response": 273919.85,
+          "replacement": 68080.63
+        },
+        "secondary_breakdown": {
+          "fines": 150624.98,
+          "reputation": 460495.93,
+          "competitive_advantage": 150837.74
+        }
+      },
+      "loss_exceedance_curve": [
+        {
+          "threshold": 0.0,
+          "probability": 0.8893
+        },
+        {
+          "threshold": 2507675.5,
+          "probability": 0.5341
+        },
+        {
+          "threshold": 5015351.01,
+          "probability": 0.3015
+        },
+        {
+          "threshold": 7523026.51,
+          "probability": 0.1756
+        },
+        {
+          "threshold": 10030702.01,
+          "probability": 0.1037
+        },
+        {
+          "threshold": 12538377.51,
+          "probability": 0.0618
+        },
+        {
+          "threshold": 15046053.02,
+          "probability": 0.0375
+        },
+        {
+          "threshold": 17553728.52,
+          "probability": 0.0232
+        },
+        {
+          "threshold": 20061404.02,
+          "probability": 0.0146
+        },
+        {
+          "threshold": 22569079.53,
+          "probability": 0.0093
+        },
+        {
+          "threshold": 25076755.03,
+          "probability": 0.0057
+        },
+        {
+          "threshold": 27584430.53,
+          "probability": 0.0037
+        },
+        {
+          "threshold": 30092106.04,
+          "probability": 0.0027
+        },
+        {
+          "threshold": 32599781.54,
+          "probability": 0.0018
+        },
+        {
+          "threshold": 35107457.04,
+          "probability": 0.0012
+        },
+        {
+          "threshold": 37615132.54,
+          "probability": 0.0011
+        },
+        {
+          "threshold": 40122808.05,
+          "probability": 0.0007
+        },
+        {
+          "threshold": 42630483.55,
+          "probability": 0.0004
+        },
+        {
+          "threshold": 45138159.05,
+          "probability": 0.0002
+        },
+        {
+          "threshold": 47645834.56,
+          "probability": 0.0001
+        },
+        {
+          "threshold": 50153510.06,
+          "probability": 0.0
+        }
+      ]
+    },
+    {
+      "id": "scenario-003",
+      "name": "Cloud Misconfiguration Exploit",
+      "severity": "LOW",
+      "risk_score": 39.4,
+      "iterations": 10000,
+      "ale": {
+        "mean": 541828.81,
+        "std": 1518856.88,
+        "percentiles": {
+          "5": 0.0,
+          "10": 0.0,
+          "25": 0.0,
+          "50": 0.0,
+          "75": 0.0,
+          "90": 1891687.13,
+          "95": 3446869.34
+        }
+      },
+      "lef": {
+        "mean": 0.1594
+      },
+      "loss_magnitude": {
+        "mean": 3378684.85,
+        "primary_breakdown": {
+          "productivity": 273353.92,
+          "response": 530167.41,
+          "replacement": 155215.37
+        },
+        "secondary_breakdown": {
+          "fines": 839958.19,
+          "reputation": 692363.45,
+          "competitive_advantage": 115617.13
+        }
+      },
+      "loss_exceedance_curve": [
+        {
+          "threshold": 0.0,
+          "probability": 0.2482
+        },
+        {
+          "threshold": 1341166.41,
+          "probability": 0.1276
+        },
+        {
+          "threshold": 2682332.83,
+          "probability": 0.07
+        },
+        {
+          "threshold": 4023499.24,
+          "probability": 0.039
+        },
+        {
+          "threshold": 5364665.65,
+          "probability": 0.0234
+        },
+        {
+          "threshold": 6705832.07,
+          "probability": 0.0137
+        },
+        {
+          "threshold": 8046998.48,
+          "probability": 0.0078
+        },
+        {
+          "threshold": 9388164.9,
+          "probability": 0.0048
+        },
+        {
+          "threshold": 10729331.31,
+          "probability": 0.0027
+        },
+        {
+          "threshold": 12070497.72,
+          "probability": 0.0017
+        },
+        {
+          "threshold": 13411664.14,
+          "probability": 0.0009
+        },
+        {
+          "threshold": 14752830.55,
+          "probability": 0.0006
+        },
+        {
+          "threshold": 16093996.96,
+          "probability": 0.0005
+        },
+        {
+          "threshold": 17435163.38,
+          "probability": 0.0005
+        },
+        {
+          "threshold": 18776329.79,
+          "probability": 0.0003
+        },
+        {
+          "threshold": 20117496.2,
+          "probability": 0.0002
+        },
+        {
+          "threshold": 21458662.62,
+          "probability": 0.0001
+        },
+        {
+          "threshold": 22799829.03,
+          "probability": 0.0001
+        },
+        {
+          "threshold": 24140995.44,
+          "probability": 0.0001
+        },
+        {
+          "threshold": 25482161.86,
+          "probability": 0.0001
+        },
+        {
+          "threshold": 26823328.27,
+          "probability": 0.0
+        }
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "control_id": "ctrl-003",
+      "control_name": "Multi-Factor Authentication (MFA)",
+      "category": "preventive",
+      "annual_cost": 95000,
+      "effectiveness_mean": 87.0,
+      "rs_boost": 13.05,
+      "risk_reduction_pct": 13.1,
+      "ale_reduction": 22740542.01,
+      "roi": 238.37
+    },
+    {
+      "control_id": "ctrl-012",
+      "control_name": "Incident Response Plan & Retainer",
+      "category": "corrective",
+      "annual_cost": 120000,
+      "effectiveness_mean": 67.8,
+      "rs_boost": 10.17,
+      "risk_reduction_pct": 10.2,
+      "ale_reduction": 26596396.62,
+      "roi": 220.64
+    },
+    {
+      "control_id": "ctrl-008",
+      "control_name": "Vulnerability Management",
+      "category": "preventive",
+      "annual_cost": 160000,
+      "effectiveness_mean": 65.0,
+      "rs_boost": 9.75,
+      "risk_reduction_pct": 9.8,
+      "ale_reduction": 21669421.25,
+      "roi": 134.43
+    },
+    {
+      "control_id": "ctrl-009",
+      "control_name": "Security Awareness Training",
+      "category": "preventive",
+      "annual_cost": 65000,
+      "effectiveness_mean": 50.0,
+      "rs_boost": 7.5,
+      "risk_reduction_pct": 7.5,
+      "ale_reduction": 8556119.64,
+      "roi": 130.63
+    },
+    {
+      "control_id": "ctrl-006",
+      "control_name": "Email Security Gateway",
+      "category": "preventive",
+      "annual_cost": 85000,
+      "effectiveness_mean": 74.7,
+      "rs_boost": 11.2,
+      "risk_reduction_pct": 11.2,
+      "ale_reduction": 9916767.1,
+      "roi": 115.67
+    },
+    {
+      "control_id": "ctrl-001",
+      "control_name": "Endpoint Detection & Response (EDR)",
+      "category": "detective",
+      "annual_cost": 280000,
+      "effectiveness_mean": 78.2,
+      "rs_boost": 11.73,
+      "risk_reduction_pct": 11.7,
+      "ale_reduction": 19400636.39,
+      "roi": 68.29
+    },
+    {
+      "control_id": "ctrl-010",
+      "control_name": "Network Segmentation & Zero Trust",
+      "category": "preventive",
+      "annual_cost": 350000,
+      "effectiveness_mean": 75.0,
+      "rs_boost": 11.25,
+      "risk_reduction_pct": 11.2,
+      "ale_reduction": 18614683.1,
+      "roi": 52.18
+    },
+    {
+      "control_id": "ctrl-005",
+      "control_name": "Backup & Disaster Recovery",
+      "category": "corrective",
+      "annual_cost": 200000,
+      "effectiveness_mean": 82.2,
+      "rs_boost": 12.33,
+      "risk_reduction_pct": 12.3,
+      "ale_reduction": 10421570.18,
+      "roi": 51.11
+    },
+    {
+      "control_id": "ctrl-002",
+      "control_name": "SIEM & SOC (24/7)",
+      "category": "detective",
+      "annual_cost": 520000,
+      "effectiveness_mean": 70.0,
+      "rs_boost": 10.5,
+      "risk_reduction_pct": 10.5,
+      "ale_reduction": 23691031.69,
+      "roi": 44.56
+    },
+    {
+      "control_id": "ctrl-004",
+      "control_name": "Web Application Firewall (WAF)",
+      "category": "preventive",
+      "annual_cost": 150000,
+      "effectiveness_mean": 68.2,
+      "rs_boost": 10.23,
+      "risk_reduction_pct": 10.2,
+      "ale_reduction": 6532581.73,
+      "roi": 42.55
+    },
+    {
+      "control_id": "ctrl-011",
+      "control_name": "Data Loss Prevention (DLP)",
+      "category": "detective",
+      "annual_cost": 190000,
+      "effectiveness_mean": 61.8,
+      "rs_boost": 9.28,
+      "risk_reduction_pct": 9.3,
+      "ale_reduction": 7950016.49,
+      "roi": 40.84
+    },
+    {
+      "control_id": "ctrl-007",
+      "control_name": "Cloud Security Posture Management",
+      "category": "detective",
+      "annual_cost": 180000,
+      "effectiveness_mean": 72.2,
+      "rs_boost": 10.82,
+      "risk_reduction_pct": 10.8,
+      "ale_reduction": 6512863.79,
+      "roi": 35.18
+    }
+  ]
+}

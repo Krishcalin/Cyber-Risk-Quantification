@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRQ Dashboard — Acme Financial Corp</title>
+<style>
+:root {
+  --bg-primary: #0a0e1a;
+  --bg-card: rgba(15, 23, 42, 0.8);
+  --bg-card-hover: rgba(20, 30, 55, 0.9);
+  --border: rgba(99, 102, 241, 0.2);
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --accent: #6366f1;
+  --accent-glow: rgba(99, 102, 241, 0.3);
+  --critical: #ef4444;
+  --high: #f97316;
+  --medium: #eab308;
+  --low: #22c55e;
+  --info: #06b6d4;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+.container { max-width: 1280px; margin: 0 auto; padding: 2rem; }
+h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.25rem; }
+h2 {
+  font-size: 1.3rem; font-weight: 600; margin: 2rem 0 1rem;
+  padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+}
+h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+.subtitle { color: var(--text-secondary); font-size: 0.9rem; }
+.header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.5rem 0; border-bottom: 1px solid var(--border);
+  margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;
+}
+.badge {
+  display: inline-block; padding: 0.2rem 0.7rem; border-radius: 999px;
+  font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+}
+.badge-critical { background: rgba(239,68,68,0.15); color: var(--critical); border: 1px solid rgba(239,68,68,0.3); }
+.badge-high { background: rgba(249,115,22,0.15); color: var(--high); border: 1px solid rgba(249,115,22,0.3); }
+.badge-medium { background: rgba(234,179,8,0.15); color: var(--medium); border: 1px solid rgba(234,179,8,0.3); }
+.badge-low { background: rgba(34,197,94,0.15); color: var(--low); border: 1px solid rgba(34,197,94,0.3); }
+
+/* Summary cards */
+.summary-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem; margin-bottom: 2rem;
+}
+.summary-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.25rem; text-align: center;
+}
+.summary-card .label { color: var(--text-secondary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.summary-card .value { font-size: 1.6rem; font-weight: 700; margin-top: 0.25rem; }
+.summary-card .sub { color: var(--text-secondary); font-size: 0.8rem; margin-top: 0.25rem; }
+
+/* Charts grid */
+.charts-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;
+}
+.chart-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.5rem;
+}
+.chart-card h3 { margin-bottom: 1rem; }
+.chart-card svg { width: 100%; height: auto; }
+
+/* Scenario cards */
+.scenario-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;
+  transition: background 0.2s;
+}
+.scenario-card:hover { background: var(--bg-card-hover); }
+.scenario-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;
+}
+.scenario-stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+.stat { padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px; }
+.stat .label { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; }
+.stat .value { font-size: 1.1rem; font-weight: 600; margin-top: 0.15rem; }
+
+/* Loss breakdown */
+.breakdown { margin-top: 1rem; }
+.breakdown-bar {
+  display: flex; align-items: center; margin: 0.3rem 0; font-size: 0.85rem;
+}
+.breakdown-bar .bar-label { width: 130px; color: var(--text-secondary); }
+.breakdown-bar .bar-track {
+  flex: 1; height: 8px; background: rgba(255,255,255,0.05); border-radius: 4px;
+  overflow: hidden; margin: 0 0.75rem;
+}
+.breakdown-bar .bar-fill { height: 100%; border-radius: 4px; }
+.breakdown-bar .bar-value { width: 100px; text-align: right; font-size: 0.8rem; }
+
+/* Controls table */
+.ctrl-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.ctrl-table th {
+  text-align: left; padding: 0.75rem; border-bottom: 2px solid var(--border);
+  color: var(--text-secondary); font-weight: 600; text-transform: uppercase;
+  font-size: 0.75rem; letter-spacing: 0.05em;
+}
+.ctrl-table td { padding: 0.75rem; border-bottom: 1px solid rgba(99,102,241,0.1); }
+.roi-positive { color: var(--low); }
+.roi-negative { color: var(--critical); }
+
+/* Footer */
+.footer {
+  margin-top: 3rem; padding: 1.5rem 0; border-top: 1px solid var(--border);
+  text-align: center; color: var(--text-secondary); font-size: 0.8rem;
+}
+
+/* Risk gauge center text */
+.gauge-text { font-family: 'Segoe UI', system-ui, sans-serif; }
+
+@media (max-width: 768px) {
+  .charts-grid { grid-template-columns: 1fr; }
+  .scenario-stats { grid-template-columns: 1fr 1fr; }
+  .summary-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <div>
+    <h1>Cyber Risk Quantification Dashboard</h1>
+    <p class="subtitle">Acme Financial Corp &bull; FAIR Model &bull;
+       10,000 Monte Carlo Iterations</p>
+  </div>
+  <div>
+    <span class="badge badge-critical">
+      Peak Risk: 87.8/100
+    </span>
+  </div>
+</div>
+
+<!-- Executive Summary -->
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="label">Total ALE (P50)</div>
+    <div class="value">$212,089,229</div>
+    <div class="sub">Expected annual loss</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Total ALE (P90)</div>
+    <div class="value" style="color: var(--high)">$512,640,718</div>
+    <div class="sub">102.53% of revenue</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Total ALE (P95)</div>
+    <div class="value" style="color: var(--critical)">$638,748,249</div>
+    <div class="sub">Worst-case exposure</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Scenarios</div>
+    <div class="value">8</div>
+    <div class="sub">5 Critical &bull; 2 High</div>
+  </div>
+</div>
+
+<!-- Charts -->
+<div class="charts-grid">
+  <div class="chart-card">
+    <h3>Risk Score Gauge</h3>
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <path d="M 50.5 149.5 A 70 70 0 1 1 149.5 149.5"
+        fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="14" stroke-linecap="round"/>
+  <path d="M 50.5 149.5 A 70 70 0 1 1 168.5 114.6"
+        fill="none" stroke="#ef4444" stroke-width="14" stroke-linecap="round"/>
+  <text x="100" y="95" text-anchor="middle" fill="#ef4444" font-size="32" font-weight="700"
+        class="gauge-text">88</text>
+  <text x="100" y="115" text-anchor="middle" fill="#94a3b8" font-size="12"
+        class="gauge-text">CRITICAL</text>
+</svg>
+  </div>
+  <div class="chart-card">
+    <h3>Risk Heatmap (Likelihood × Impact)</h3>
+    <svg viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg">
+  <!-- Grid labels -->
+  <text x="160" y="270" text-anchor="middle" fill="#94a3b8" font-size="11">Likelihood (LEF)</text>
+  <text x="10" y="130" text-anchor="middle" fill="#94a3b8" font-size="11"
+        transform="rotate(-90, 10, 130)">Impact ($)</text>
+  <!-- Grid -->
+  <text x="71" y="240" text-anchor="middle" fill="#64748b" font-size="9">Rare</text>
+  <text x="123" y="240" text-anchor="middle" fill="#64748b" font-size="9">Low</text>
+  <text x="175" y="240" text-anchor="middle" fill="#64748b" font-size="9">Med</text>
+  <text x="227" y="240" text-anchor="middle" fill="#64748b" font-size="9">High</text>
+  <text x="279" y="240" text-anchor="middle" fill="#64748b" font-size="9">V.High</text>
+  <text x="40" y="39" text-anchor="end" fill="#64748b" font-size="9">V.High</text>
+  <text x="40" y="81" text-anchor="end" fill="#64748b" font-size="9">High</text>
+  <text x="40" y="123" text-anchor="end" fill="#64748b" font-size="9">Med</text>
+  <text x="40" y="165" text-anchor="end" fill="#64748b" font-size="9">Low</text>
+  <text x="40" y="207" text-anchor="end" fill="#64748b" font-size="9">Neg.</text>
+  <rect x="45" y="15" width="52" height="42" rx="4" fill="#22c55e" opacity="0.15" stroke="#22c55e" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="97" y="15" width="52" height="42" rx="4" fill="#eab308" opacity="0.15" stroke="#eab308" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="149" y="15" width="52" height="42" rx="4" fill="#f97316" opacity="0.15" stroke="#f97316" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="201" y="15" width="52" height="42" rx="4" fill="#ef4444" opacity="0.15" stroke="#ef4444" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="253" y="15" width="52" height="42" rx="4" fill="#ef4444" opacity="0.15" stroke="#ef4444" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="45" y="57" width="52" height="42" rx="4" fill="#22c55e" opacity="0.15" stroke="#22c55e" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="97" y="57" width="52" height="42" rx="4" fill="#eab308" opacity="0.15" stroke="#eab308" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="149" y="57" width="52" height="42" rx="4" fill="#f97316" opacity="0.15" stroke="#f97316" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="201" y="57" width="52" height="42" rx="4" fill="#f97316" opacity="0.15" stroke="#f97316" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="253" y="57" width="52" height="42" rx="4" fill="#ef4444" opacity="0.15" stroke="#ef4444" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="45" y="99" width="52" height="42" rx="4" fill="#22c55e" opacity="0.15" stroke="#22c55e" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="97" y="99" width="52" height="42" rx="4" fill="#22c55e" opacity="0.15" stroke="#22c55e" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="149" y="99" width="52" height="42" rx="4" fill="#eab308" opacity="0.15" stroke="#eab308" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="201" y="99" width="52" height="42" rx="4" fill="#f97316" opacity="0.15" stroke="#f97316" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="253" y="99" width="52" height="42" rx="4" fill="#f97316" opacity="0.15" stroke="#f97316" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="45" y="141" width="52" height="42" rx="4" fill="#22c55e" opacity="0.15" stroke="#22c55e" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="97" y="141" width="52" height="42" rx="4" fill="#22c55e" opacity="0.15" stroke="#22c55e" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="149" y="141" width="52" height="42" rx="4" fill="#22c55e" opacity="0.15" stroke="#22c55e" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="201" y="141" width="52" height="42" rx="4" fill="#eab308" opacity="0.15" stroke="#eab308" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="253" y="141" width="52" height="42" rx="4" fill="#eab308" opacity="0.15" stroke="#eab308" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="45" y="183" width="52" height="42" rx="4" fill="#22c55e" opacity="0.15" stroke="#22c55e" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="97" y="183" width="52" height="42" rx="4" fill="#22c55e" opacity="0.15" stroke="#22c55e" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="149" y="183" width="52" height="42" rx="4" fill="#22c55e" opacity="0.15" stroke="#22c55e" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="201" y="183" width="52" height="42" rx="4" fill="#22c55e" opacity="0.15" stroke="#22c55e" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="253" y="183" width="52" height="42" rx="4" fill="#22c55e" opacity="0.15" stroke="#22c55e" stroke-width="0.5" stroke-opacity="0.3"/>
+  <circle cx="175" cy="36" r="14" fill="#ef4444" opacity="0.8"/>
+  <text x="175" y="39" text-anchor="middle" fill="white" font-size="8" font-weight="600">RAN</text>
+  <circle cx="227" cy="78" r="14" fill="#ef4444" opacity="0.8"/>
+  <text x="227" y="81" text-anchor="middle" fill="white" font-size="8" font-weight="600">API</text>
+  <circle cx="175" cy="36" r="14" fill="#ef4444" opacity="0.8"/>
+  <text x="175" y="39" text-anchor="middle" fill="white" font-size="8" font-weight="600">DAT</text>
+  <circle cx="175" cy="36" r="14" fill="#ef4444" opacity="0.8"/>
+  <text x="175" y="39" text-anchor="middle" fill="white" font-size="8" font-weight="600">MAL</text>
+  <circle cx="123" cy="36" r="14" fill="#ef4444" opacity="0.8"/>
+  <text x="123" y="39" text-anchor="middle" fill="white" font-size="8" font-weight="600">SUP</text>
+  <circle cx="175" cy="78" r="14" fill="#f97316" opacity="0.8"/>
+  <text x="175" y="81" text-anchor="middle" fill="white" font-size="8" font-weight="600">BUS</text>
+  <circle cx="175" cy="78" r="14" fill="#f97316" opacity="0.8"/>
+  <text x="175" y="81" text-anchor="middle" fill="white" font-size="8" font-weight="600">DDO</text>
+  <circle cx="123" cy="78" r="14" fill="#22c55e" opacity="0.8"/>
+  <text x="123" y="81" text-anchor="middle" fill="white" font-size="8" font-weight="600">CLO</text>
+</svg>
+  </div>
+  <div class="chart-card">
+    <h3>Loss Exceedance Curve (Aggregate)</h3>
+    <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+  <!-- Axes -->
+  <line x1="50" y1="10" x2="50" y2="150" stroke="#334155" stroke-width="1"/>
+  <line x1="50" y1="150" x2="290" y2="150" stroke="#334155" stroke-width="1"/>
+
+  <!-- Y axis labels (probability) -->
+  <text x="45" y="15" text-anchor="end" fill="#64748b" font-size="9">100%</text>
+  <text x="45" y="83.0" text-anchor="end" fill="#64748b" font-size="9">50%</text>
+  <text x="45" y="153" text-anchor="end" fill="#64748b" font-size="9">0%</text>
+
+  <!-- X axis labels (loss) -->
+  <text x="50" y="165" text-anchor="start" fill="#64748b" font-size="9">$0</text>
+  <text x="170.0" y="165" text-anchor="middle" fill="#64748b" font-size="9">$315M</text>
+  <text x="290" y="165" text-anchor="end" fill="#64748b" font-size="9">$630M</text>
+
+  <!-- Grid lines -->
+  <line x1="50" y1="45.0" x2="290" y2="45.0" stroke="#1e293b" stroke-width="0.5"/>
+  <line x1="50" y1="80.0" x2="290" y2="80.0" stroke="#1e293b" stroke-width="0.5"/>
+  <line x1="50" y1="115.0" x2="290" y2="115.0" stroke="#1e293b" stroke-width="0.5"/>
+
+  <!-- Curve -->
+  <polyline points="50.0,25.1 54.8,68.6 59.6,93.1 64.4,108.8 69.2,119.8 74.0,127.4 78.8,133.1 83.6,137.3 88.4,140.3 93.2,142.5 98.0,144.2 102.8,145.6 107.6,146.6 112.4,147.3 117.2,147.9 122.0,148.4 126.8,148.7 131.6,149.0 136.4,149.2 141.2,149.4 146.0,149.5 150.8,149.6 155.6,149.7 160.4,149.7 165.2,149.8 170.0,149.8 174.8,149.9 179.6,149.9 184.4,149.9 189.2,149.9 194.0,149.9 198.8,150.0 203.6,150.0 208.4,150.0 213.2,150.0 218.0,150.0 222.8,150.0 227.6,150.0 232.4,150.0 237.2,150.0 242.0,150.0 246.8,150.0 251.6,150.0 256.4,150.0 261.2,150.0 266.0,150.0 270.8,150.0 275.6,150.0 280.4,150.0 285.2,150.0 290.0,150.0" fill="none" stroke="#6366f1" stroke-width="2"/>
+
+  <!-- Fill area -->
+  <polygon points="50,10 50.0,25.1 54.8,68.6 59.6,93.1 64.4,108.8 69.2,119.8 74.0,127.4 78.8,133.1 83.6,137.3 88.4,140.3 93.2,142.5 98.0,144.2 102.8,145.6 107.6,146.6 112.4,147.3 117.2,147.9 122.0,148.4 126.8,148.7 131.6,149.0 136.4,149.2 141.2,149.4 146.0,149.5 150.8,149.6 155.6,149.7 160.4,149.7 165.2,149.8 170.0,149.8 174.8,149.9 179.6,149.9 184.4,149.9 189.2,149.9 194.0,149.9 198.8,150.0 203.6,150.0 208.4,150.0 213.2,150.0 218.0,150.0 222.8,150.0 227.6,150.0 232.4,150.0 237.2,150.0 242.0,150.0 246.8,150.0 251.6,150.0 256.4,150.0 261.2,150.0 266.0,150.0 270.8,150.0 275.6,150.0 280.4,150.0 285.2,150.0 290.0,150.0 290,150 50,150"
+           fill="url(#lec-grad)" opacity="0.3"/>
+
+  <defs>
+    <linearGradient id="lec-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Axis titles -->
+  <text x="170.0" y="178" text-anchor="middle" fill="#94a3b8" font-size="9">Annual Loss ($)</text>
+</svg>
+  </div>
+  <div class="chart-card">
+    <h3>Control Effectiveness</h3>
+    <svg viewBox="0 0 300 404" xmlns="http://www.w3.org/2000/svg">
+  <text x="135" y="20" text-anchor="end" fill="#94a3b8" font-size="9">Multi-Factor Authent…</text>
+  <rect x="140" y="5" width="150" height="24" rx="4" fill="rgba(255,255,255,0.03)"/>
+  <rect x="140" y="5" width="130" height="24" rx="4" fill="#22c55e" opacity="0.7"/>
+  <text x="275.5" y="20" fill="#e2e8f0" font-size="9">87% (ROI: 238.4x)</text>
+  <text x="135" y="52" text-anchor="end" fill="#94a3b8" font-size="9">Incident Response Pl…</text>
+  <rect x="140" y="37" width="150" height="24" rx="4" fill="rgba(255,255,255,0.03)"/>
+  <rect x="140" y="37" width="102" height="24" rx="4" fill="#22c55e" opacity="0.7"/>
+  <text x="246.7" y="52" fill="#e2e8f0" font-size="9">68% (ROI: 220.6x)</text>
+  <text x="135" y="84" text-anchor="end" fill="#94a3b8" font-size="9">Vulnerability Manage…</text>
+  <rect x="140" y="69" width="150" height="24" rx="4" fill="rgba(255,255,255,0.03)"/>
+  <rect x="140" y="69" width="98" height="24" rx="4" fill="#22c55e" opacity="0.7"/>
+  <text x="242.5" y="84" fill="#e2e8f0" font-size="9">65% (ROI: 134.4x)</text>
+  <text x="135" y="116" text-anchor="end" fill="#94a3b8" font-size="9">Security Awareness T…</text>
+  <rect x="140" y="101" width="150" height="24" rx="4" fill="rgba(255,255,255,0.03)"/>
+  <rect x="140" y="101" width="75" height="24" rx="4" fill="#22c55e" opacity="0.7"/>
+  <text x="220.0" y="116" fill="#e2e8f0" font-size="9">50% (ROI: 130.6x)</text>
+  <text x="135" y="148" text-anchor="end" fill="#94a3b8" font-size="9">Email Security Gatew…</text>
+  <rect x="140" y="133" width="150" height="24" rx="4" fill="rgba(255,255,255,0.03)"/>
+  <rect x="140" y="133" width="112" height="24" rx="4" fill="#22c55e" opacity="0.7"/>
+  <text x="257.05" y="148" fill="#e2e8f0" font-size="9">75% (ROI: 115.7x)</text>
+  <text x="135" y="180" text-anchor="end" fill="#94a3b8" font-size="9">Endpoint Detection &amp;…</text>
+  <rect x="140" y="165" width="150" height="24" rx="4" fill="rgba(255,255,255,0.03)"/>
+  <rect x="140" y="165" width="117" height="24" rx="4" fill="#22c55e" opacity="0.7"/>
+  <text x="262.3" y="180" fill="#e2e8f0" font-size="9">78% (ROI: 68.3x)</text>
+  <text x="135" y="212" text-anchor="end" fill="#94a3b8" font-size="9">Network Segmentation…</text>
+  <rect x="140" y="197" width="150" height="24" rx="4" fill="rgba(255,255,255,0.03)"/>
+  <rect x="140" y="197" width="112" height="24" rx="4" fill="#22c55e" opacity="0.7"/>
+  <text x="257.5" y="212" fill="#e2e8f0" font-size="9">75% (ROI: 52.2x)</text>
+  <text x="135" y="244" text-anchor="end" fill="#94a3b8" font-size="9">Backup &amp; Disaster Re…</text>
+  <rect x="140" y="229" width="150" height="24" rx="4" fill="rgba(255,255,255,0.03)"/>
+  <rect x="140" y="229" width="123" height="24" rx="4" fill="#22c55e" opacity="0.7"/>
+  <text x="268.3" y="244" fill="#e2e8f0" font-size="9">82% (ROI: 51.1x)</text>
+  <text x="135" y="276" text-anchor="end" fill="#94a3b8" font-size="9">SIEM &amp; SOC (24/7)</text>
+  <rect x="140" y="261" width="150" height="24" rx="4" fill="rgba(255,255,255,0.03)"/>
+  <rect x="140" y="261" width="105" height="24" rx="4" fill="#22c55e" opacity="0.7"/>
+  <text x="250.0" y="276" fill="#e2e8f0" font-size="9">70% (ROI: 44.6x)</text>
+  <text x="135" y="308" text-anchor="end" fill="#94a3b8" font-size="9">Web Application Fire…</text>
+  <rect x="140" y="293" width="150" height="24" rx="4" fill="rgba(255,255,255,0.03)"/>
+  <rect x="140" y="293" width="102" height="24" rx="4" fill="#22c55e" opacity="0.7"/>
+  <text x="247.3" y="308" fill="#e2e8f0" font-size="9">68% (ROI: 42.5x)</text>
+  <text x="135" y="340" text-anchor="end" fill="#94a3b8" font-size="9">Data Loss Prevention…</text>
+  <rect x="140" y="325" width="150" height="24" rx="4" fill="rgba(255,255,255,0.03)"/>
+  <rect x="140" y="325" width="93" height="24" rx="4" fill="#22c55e" opacity="0.7"/>
+  <text x="237.7" y="340" fill="#e2e8f0" font-size="9">62% (ROI: 40.8x)</text>
+  <text x="135" y="372" text-anchor="end" fill="#94a3b8" font-size="9">Cloud Security Postu…</text>
+  <rect x="140" y="357" width="150" height="24" rx="4" fill="rgba(255,255,255,0.03)"/>
+  <rect x="140" y="357" width="108" height="24" rx="4" fill="#22c55e" opacity="0.7"/>
+  <text x="253.3" y="372" fill="#e2e8f0" font-size="9">72% (ROI: 35.2x)</text>
+</svg>
+  </div>
+</div>
+
+<!-- Scenario Details -->
+<h2>Scenario Analysis</h2>
+
+<div class="scenario-card">
+  <div class="scenario-header">
+    <h3>Ransomware Attack</h3>
+    <span class="badge badge-critical">CRITICAL — Score 87.8</span>
+  </div>
+  <div class="scenario-stats">
+    <div class="stat">
+      <div class="label">ALE Expected (P50)</div>
+      <div class="value">$62,643,229</div>
+    </div>
+    <div class="stat">
+      <div class="label">ALE Likely Max (P90)</div>
+      <div class="value" style="color:var(--high)">$162,571,126</div>
+    </div>
+    <div class="stat">
+      <div class="label">ALE Worst (P95)</div>
+      <div class="value" style="color:var(--critical)">$207,090,343</div>
+    </div>
+    <div class="stat">
+      <div class="label">Mean LEF</div>
+      <div class="value">4.49/yr</div>
+    </div>
+    <div class="stat">
+      <div class="label">Mean Loss/Event</div>
+      <div class="value">$17,773,988</div>
+    </div>
+    <div class="stat">
+      <div class="label">% of Revenue (P90)</div>
+      <div class="value">32.514%</div>
+    </div>
+  </div>
+  <div class="breakdown">
+    <h3 style="font-size:0.85rem;color:var(--text-secondary);margin-top:1rem">Average Loss Breakdown (per event)</h3>
+    
+        <div class="breakdown-bar">
+          <span class="bar-label">Productivity</span>
+          <div class="bar-track"><div class="bar-fill" style="width:61%;background:#6366f1"></div></div>
+          <span class="bar-value">$2,754,649</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Response</span>
+          <div class="bar-track"><div class="bar-fill" style="width:42%;background:#8b5cf6"></div></div>
+          <span class="bar-value">$1,887,086</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Replacement</span>
+          <div class="bar-track"><div class="bar-fill" style="width:15%;background:#a78bfa"></div></div>
+          <span class="bar-value">$684,613</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Fines</span>
+          <div class="bar-track"><div class="bar-fill" style="width:66%;background:#ef4444"></div></div>
+          <span class="bar-value">$2,992,982</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Reputation</span>
+          <div class="bar-track"><div class="bar-fill" style="width:100%;background:#f97316"></div></div>
+          <span class="bar-value">$4,518,600</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Competitive Advantage</span>
+          <div class="bar-track"><div class="bar-fill" style="width:18%;background:#eab308"></div></div>
+          <span class="bar-value">$834,368</span>
+        </div>
+  </div>
+</div>
+<div class="scenario-card">
+  <div class="scenario-header">
+    <h3>API Exploit — Open Banking</h3>
+    <span class="badge badge-critical">CRITICAL — Score 84.2</span>
+  </div>
+  <div class="scenario-stats">
+    <div class="stat">
+      <div class="label">ALE Expected (P50)</div>
+      <div class="value">$48,601,716</div>
+    </div>
+    <div class="stat">
+      <div class="label">ALE Likely Max (P90)</div>
+      <div class="value" style="color:var(--high)">$116,443,793</div>
+    </div>
+    <div class="stat">
+      <div class="label">ALE Worst (P95)</div>
+      <div class="value" style="color:var(--critical)">$144,159,381</div>
+    </div>
+    <div class="stat">
+      <div class="label">Mean LEF</div>
+      <div class="value">8.59/yr</div>
+    </div>
+    <div class="stat">
+      <div class="label">Mean Loss/Event</div>
+      <div class="value">$6,943,650</div>
+    </div>
+    <div class="stat">
+      <div class="label">% of Revenue (P90)</div>
+      <div class="value">23.289%</div>
+    </div>
+  </div>
+  <div class="breakdown">
+    <h3 style="font-size:0.85rem;color:var(--text-secondary);margin-top:1rem">Average Loss Breakdown (per event)</h3>
+    
+        <div class="breakdown-bar">
+          <span class="bar-label">Productivity</span>
+          <div class="bar-track"><div class="bar-fill" style="width:27%;background:#6366f1"></div></div>
+          <span class="bar-value">$408,676</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Response</span>
+          <div class="bar-track"><div class="bar-fill" style="width:70%;background:#8b5cf6"></div></div>
+          <span class="bar-value">$1,071,041</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Replacement</span>
+          <div class="bar-track"><div class="bar-fill" style="width:18%;background:#a78bfa"></div></div>
+          <span class="bar-value">$274,530</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Fines</span>
+          <div class="bar-track"><div class="bar-fill" style="width:100%;background:#ef4444"></div></div>
+          <span class="bar-value">$1,516,984</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Reputation</span>
+          <div class="bar-track"><div class="bar-fill" style="width:100%;background:#f97316"></div></div>
+          <span class="bar-value">$1,523,460</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Competitive Advantage</span>
+          <div class="bar-track"><div class="bar-fill" style="width:36%;background:#eab308"></div></div>
+          <span class="bar-value">$546,578</span>
+        </div>
+  </div>
+</div>
+<div class="scenario-card">
+  <div class="scenario-header">
+    <h3>Data Breach — Exfiltration by Nation-State</h3>
+    <span class="badge badge-critical">CRITICAL — Score 83.8</span>
+  </div>
+  <div class="scenario-stats">
+    <div class="stat">
+      <div class="label">ALE Expected (P50)</div>
+      <div class="value">$50,467,094</div>
+    </div>
+    <div class="stat">
+      <div class="label">ALE Likely Max (P90)</div>
+      <div class="value" style="color:var(--high)">$112,876,713</div>
+    </div>
+    <div class="stat">
+      <div class="label">ALE Worst (P95)</div>
+      <div class="value" style="color:var(--critical)">$137,017,182</div>
+    </div>
+    <div class="stat">
+      <div class="label">Mean LEF</div>
+      <div class="value">2.00/yr</div>
+    </div>
+    <div class="stat">
+      <div class="label">Mean Loss/Event</div>
+      <div class="value">$30,115,584</div>
+    </div>
+    <div class="stat">
+      <div class="label">% of Revenue (P90)</div>
+      <div class="value">22.575%</div>
+    </div>
+  </div>
+  <div class="breakdown">
+    <h3 style="font-size:0.85rem;color:var(--text-secondary);margin-top:1rem">Average Loss Breakdown (per event)</h3>
+    
+        <div class="breakdown-bar">
+          <span class="bar-label">Productivity</span>
+          <div class="bar-track"><div class="bar-fill" style="width:14%;background:#6366f1"></div></div>
+          <span class="bar-value">$1,073,963</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Response</span>
+          <div class="bar-track"><div class="bar-fill" style="width:36%;background:#8b5cf6"></div></div>
+          <span class="bar-value">$2,734,830</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Replacement</span>
+          <div class="bar-track"><div class="bar-fill" style="width:5%;background:#a78bfa"></div></div>
+          <span class="bar-value">$382,480</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Fines</span>
+          <div class="bar-track"><div class="bar-fill" style="width:88%;background:#ef4444"></div></div>
+          <span class="bar-value">$6,737,832</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Reputation</span>
+          <div class="bar-track"><div class="bar-fill" style="width:100%;background:#f97316"></div></div>
+          <span class="bar-value">$7,664,311</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Competitive Advantage</span>
+          <div class="bar-track"><div class="bar-fill" style="width:60%;background:#eab308"></div></div>
+          <span class="bar-value">$4,572,417</span>
+        </div>
+  </div>
+</div>
+<div class="scenario-card">
+  <div class="scenario-header">
+    <h3>Malicious Insider Threat</h3>
+    <span class="badge badge-critical">CRITICAL — Score 74.7</span>
+  </div>
+  <div class="scenario-stats">
+    <div class="stat">
+      <div class="label">ALE Expected (P50)</div>
+      <div class="value">$21,285,935</div>
+    </div>
+    <div class="stat">
+      <div class="label">ALE Likely Max (P90)</div>
+      <div class="value" style="color:var(--high)">$48,836,329</div>
+    </div>
+    <div class="stat">
+      <div class="label">ALE Worst (P95)</div>
+      <div class="value" style="color:var(--critical)">$60,003,463</div>
+    </div>
+    <div class="stat">
+      <div class="label">Mean LEF</div>
+      <div class="value">1.87/yr</div>
+    </div>
+    <div class="stat">
+      <div class="label">Mean Loss/Event</div>
+      <div class="value">$13,647,658</div>
+    </div>
+    <div class="stat">
+      <div class="label">% of Revenue (P90)</div>
+      <div class="value">9.767%</div>
+    </div>
+  </div>
+  <div class="breakdown">
+    <h3 style="font-size:0.85rem;color:var(--text-secondary);margin-top:1rem">Average Loss Breakdown (per event)</h3>
+    
+        <div class="breakdown-bar">
+          <span class="bar-label">Productivity</span>
+          <div class="bar-track"><div class="bar-fill" style="width:49%;background:#6366f1"></div></div>
+          <span class="bar-value">$1,530,485</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Response</span>
+          <div class="bar-track"><div class="bar-fill" style="width:49%;background:#8b5cf6"></div></div>
+          <span class="bar-value">$1,526,619</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Replacement</span>
+          <div class="bar-track"><div class="bar-fill" style="width:15%;background:#a78bfa"></div></div>
+          <span class="bar-value">$457,360</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Fines</span>
+          <div class="bar-track"><div class="bar-fill" style="width:48%;background:#ef4444"></div></div>
+          <span class="bar-value">$1,508,807</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Reputation</span>
+          <div class="bar-track"><div class="bar-fill" style="width:100%;background:#f97316"></div></div>
+          <span class="bar-value">$3,116,583</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Competitive Advantage</span>
+          <div class="bar-track"><div class="bar-fill" style="width:76%;background:#eab308"></div></div>
+          <span class="bar-value">$2,358,344</span>
+        </div>
+  </div>
+</div>
+<div class="scenario-card">
+  <div class="scenario-header">
+    <h3>Supply Chain Compromise</h3>
+    <span class="badge badge-critical">CRITICAL — Score 73.3</span>
+  </div>
+  <div class="scenario-stats">
+    <div class="stat">
+      <div class="label">ALE Expected (P50)</div>
+      <div class="value">$19,121,597</div>
+    </div>
+    <div class="stat">
+      <div class="label">ALE Likely Max (P90)</div>
+      <div class="value" style="color:var(--high)">$42,718,631</div>
+    </div>
+    <div class="stat">
+      <div class="label">ALE Worst (P95)</div>
+      <div class="value" style="color:var(--critical)">$52,111,350</div>
+    </div>
+    <div class="stat">
+      <div class="label">Mean LEF</div>
+      <div class="value">0.89/yr</div>
+    </div>
+    <div class="stat">
+      <div class="label">Mean Loss/Event</div>
+      <div class="value">$25,490,226</div>
+    </div>
+    <div class="stat">
+      <div class="label">% of Revenue (P90)</div>
+      <div class="value">8.544%</div>
+    </div>
+  </div>
+  <div class="breakdown">
+    <h3 style="font-size:0.85rem;color:var(--text-secondary);margin-top:1rem">Average Loss Breakdown (per event)</h3>
+    
+        <div class="breakdown-bar">
+          <span class="bar-label">Productivity</span>
+          <div class="bar-track"><div class="bar-fill" style="width:30%;background:#6366f1"></div></div>
+          <span class="bar-value">$2,042,426</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Response</span>
+          <div class="bar-track"><div class="bar-fill" style="width:50%;background:#8b5cf6"></div></div>
+          <span class="bar-value">$3,417,950</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Replacement</span>
+          <div class="bar-track"><div class="bar-fill" style="width:23%;background:#a78bfa"></div></div>
+          <span class="bar-value">$1,541,247</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Fines</span>
+          <div class="bar-track"><div class="bar-fill" style="width:40%;background:#ef4444"></div></div>
+          <span class="bar-value">$2,708,889</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Reputation</span>
+          <div class="bar-track"><div class="bar-fill" style="width:100%;background:#f97316"></div></div>
+          <span class="bar-value">$6,820,675</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Competitive Advantage</span>
+          <div class="bar-track"><div class="bar-fill" style="width:45%;background:#eab308"></div></div>
+          <span class="bar-value">$3,076,680</span>
+        </div>
+  </div>
+</div>
+<div class="scenario-card">
+  <div class="scenario-header">
+    <h3>Business Email Compromise (BEC)</h3>
+    <span class="badge badge-high">HIGH — Score 63.3</span>
+  </div>
+  <div class="scenario-stats">
+    <div class="stat">
+      <div class="label">ALE Expected (P50)</div>
+      <div class="value">$7,154,519</div>
+    </div>
+    <div class="stat">
+      <div class="label">ALE Likely Max (P90)</div>
+      <div class="value" style="color:var(--high)">$17,092,270</div>
+    </div>
+    <div class="stat">
+      <div class="label">ALE Worst (P95)</div>
+      <div class="value" style="color:var(--critical)">$21,298,804</div>
+    </div>
+    <div class="stat">
+      <div class="label">Mean LEF</div>
+      <div class="value">4.82/yr</div>
+    </div>
+    <div class="stat">
+      <div class="label">Mean Loss/Event</div>
+      <div class="value">$1,819,984</div>
+    </div>
+    <div class="stat">
+      <div class="label">% of Revenue (P90)</div>
+      <div class="value">3.418%</div>
+    </div>
+  </div>
+  <div class="breakdown">
+    <h3 style="font-size:0.85rem;color:var(--text-secondary);margin-top:1rem">Average Loss Breakdown (per event)</h3>
+    
+        <div class="breakdown-bar">
+          <span class="bar-label">Productivity</span>
+          <div class="bar-track"><div class="bar-fill" style="width:33%;background:#6366f1"></div></div>
+          <span class="bar-value">$152,740</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Response</span>
+          <div class="bar-track"><div class="bar-fill" style="width:74%;background:#8b5cf6"></div></div>
+          <span class="bar-value">$339,583</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Replacement</span>
+          <div class="bar-track"><div class="bar-fill" style="width:15%;background:#a78bfa"></div></div>
+          <span class="bar-value">$68,090</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Fines</span>
+          <div class="bar-track"><div class="bar-fill" style="width:66%;background:#ef4444"></div></div>
+          <span class="bar-value">$299,732</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Reputation</span>
+          <div class="bar-track"><div class="bar-fill" style="width:100%;background:#f97316"></div></div>
+          <span class="bar-value">$456,437</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Competitive Advantage</span>
+          <div class="bar-track"><div class="bar-fill" style="width:18%;background:#eab308"></div></div>
+          <span class="bar-value">$83,405</span>
+        </div>
+  </div>
+</div>
+<div class="scenario-card">
+  <div class="scenario-header">
+    <h3>DDoS Attack on Digital Banking</h3>
+    <span class="badge badge-high">HIGH — Score 57.8</span>
+  </div>
+  <div class="scenario-stats">
+    <div class="stat">
+      <div class="label">ALE Expected (P50)</div>
+      <div class="value">$2,815,138</div>
+    </div>
+    <div class="stat">
+      <div class="label">ALE Likely Max (P90)</div>
+      <div class="value" style="color:var(--high)">$10,210,168</div>
+    </div>
+    <div class="stat">
+      <div class="label">ALE Worst (P95)</div>
+      <div class="value" style="color:var(--critical)">$13,620,856</div>
+    </div>
+    <div class="stat">
+      <div class="label">Mean LEF</div>
+      <div class="value">1.83/yr</div>
+    </div>
+    <div class="stat">
+      <div class="label">Mean Loss/Event</div>
+      <div class="value">$2,326,176</div>
+    </div>
+    <div class="stat">
+      <div class="label">% of Revenue (P90)</div>
+      <div class="value">2.042%</div>
+    </div>
+  </div>
+  <div class="breakdown">
+    <h3 style="font-size:0.85rem;color:var(--text-secondary);margin-top:1rem">Average Loss Breakdown (per event)</h3>
+    
+        <div class="breakdown-bar">
+          <span class="bar-label">Productivity</span>
+          <div class="bar-track"><div class="bar-fill" style="width:100%;background:#6366f1"></div></div>
+          <span class="bar-value">$686,820</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Response</span>
+          <div class="bar-track"><div class="bar-fill" style="width:40%;background:#8b5cf6"></div></div>
+          <span class="bar-value">$273,920</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Replacement</span>
+          <div class="bar-track"><div class="bar-fill" style="width:10%;background:#a78bfa"></div></div>
+          <span class="bar-value">$68,081</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Fines</span>
+          <div class="bar-track"><div class="bar-fill" style="width:22%;background:#ef4444"></div></div>
+          <span class="bar-value">$150,625</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Reputation</span>
+          <div class="bar-track"><div class="bar-fill" style="width:67%;background:#f97316"></div></div>
+          <span class="bar-value">$460,496</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Competitive Advantage</span>
+          <div class="bar-track"><div class="bar-fill" style="width:22%;background:#eab308"></div></div>
+          <span class="bar-value">$150,838</span>
+        </div>
+  </div>
+</div>
+<div class="scenario-card">
+  <div class="scenario-header">
+    <h3>Cloud Misconfiguration Exploit</h3>
+    <span class="badge badge-low">LOW — Score 39.4</span>
+  </div>
+  <div class="scenario-stats">
+    <div class="stat">
+      <div class="label">ALE Expected (P50)</div>
+      <div class="value">$0</div>
+    </div>
+    <div class="stat">
+      <div class="label">ALE Likely Max (P90)</div>
+      <div class="value" style="color:var(--high)">$1,891,687</div>
+    </div>
+    <div class="stat">
+      <div class="label">ALE Worst (P95)</div>
+      <div class="value" style="color:var(--critical)">$3,446,869</div>
+    </div>
+    <div class="stat">
+      <div class="label">Mean LEF</div>
+      <div class="value">0.16/yr</div>
+    </div>
+    <div class="stat">
+      <div class="label">Mean Loss/Event</div>
+      <div class="value">$3,378,685</div>
+    </div>
+    <div class="stat">
+      <div class="label">% of Revenue (P90)</div>
+      <div class="value">0.378%</div>
+    </div>
+  </div>
+  <div class="breakdown">
+    <h3 style="font-size:0.85rem;color:var(--text-secondary);margin-top:1rem">Average Loss Breakdown (per event)</h3>
+    
+        <div class="breakdown-bar">
+          <span class="bar-label">Productivity</span>
+          <div class="bar-track"><div class="bar-fill" style="width:33%;background:#6366f1"></div></div>
+          <span class="bar-value">$273,354</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Response</span>
+          <div class="bar-track"><div class="bar-fill" style="width:63%;background:#8b5cf6"></div></div>
+          <span class="bar-value">$530,167</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Replacement</span>
+          <div class="bar-track"><div class="bar-fill" style="width:18%;background:#a78bfa"></div></div>
+          <span class="bar-value">$155,215</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Fines</span>
+          <div class="bar-track"><div class="bar-fill" style="width:100%;background:#ef4444"></div></div>
+          <span class="bar-value">$839,958</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Reputation</span>
+          <div class="bar-track"><div class="bar-fill" style="width:82%;background:#f97316"></div></div>
+          <span class="bar-value">$692,363</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">Competitive Advantage</span>
+          <div class="bar-track"><div class="bar-fill" style="width:14%;background:#eab308"></div></div>
+          <span class="bar-value">$115,617</span>
+        </div>
+  </div>
+</div>
+
+<!-- Control Analysis -->
+<h2>Control Effectiveness</h2>
+
+<table class="ctrl-table">
+  <thead>
+    <tr>
+      <th>Control</th><th>Type</th><th style="text-align:right">Effectiveness</th>
+      <th style="text-align:right">ALE Reduction</th><th style="text-align:right">Annual Cost</th>
+      <th style="text-align:right">ROI</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Multi-Factor Authentication (MFA)</td>
+      <td>preventive</td>
+      <td style="text-align:right">87%</td>
+      <td style="text-align:right">$22,740,542</td>
+      <td style="text-align:right">$95,000</td>
+      <td style="text-align:right" class="roi-positive">238.4x</td>
+    </tr>
+    <tr>
+      <td>Incident Response Plan &amp; Retainer</td>
+      <td>corrective</td>
+      <td style="text-align:right">68%</td>
+      <td style="text-align:right">$26,596,397</td>
+      <td style="text-align:right">$120,000</td>
+      <td style="text-align:right" class="roi-positive">220.6x</td>
+    </tr>
+    <tr>
+      <td>Vulnerability Management</td>
+      <td>preventive</td>
+      <td style="text-align:right">65%</td>
+      <td style="text-align:right">$21,669,421</td>
+      <td style="text-align:right">$160,000</td>
+      <td style="text-align:right" class="roi-positive">134.4x</td>
+    </tr>
+    <tr>
+      <td>Security Awareness Training</td>
+      <td>preventive</td>
+      <td style="text-align:right">50%</td>
+      <td style="text-align:right">$8,556,120</td>
+      <td style="text-align:right">$65,000</td>
+      <td style="text-align:right" class="roi-positive">130.6x</td>
+    </tr>
+    <tr>
+      <td>Email Security Gateway</td>
+      <td>preventive</td>
+      <td style="text-align:right">75%</td>
+      <td style="text-align:right">$9,916,767</td>
+      <td style="text-align:right">$85,000</td>
+      <td style="text-align:right" class="roi-positive">115.7x</td>
+    </tr>
+    <tr>
+      <td>Endpoint Detection &amp; Response (EDR)</td>
+      <td>detective</td>
+      <td style="text-align:right">78%</td>
+      <td style="text-align:right">$19,400,636</td>
+      <td style="text-align:right">$280,000</td>
+      <td style="text-align:right" class="roi-positive">68.3x</td>
+    </tr>
+    <tr>
+      <td>Network Segmentation &amp; Zero Trust</td>
+      <td>preventive</td>
+      <td style="text-align:right">75%</td>
+      <td style="text-align:right">$18,614,683</td>
+      <td style="text-align:right">$350,000</td>
+      <td style="text-align:right" class="roi-positive">52.2x</td>
+    </tr>
+    <tr>
+      <td>Backup &amp; Disaster Recovery</td>
+      <td>corrective</td>
+      <td style="text-align:right">82%</td>
+      <td style="text-align:right">$10,421,570</td>
+      <td style="text-align:right">$200,000</td>
+      <td style="text-align:right" class="roi-positive">51.1x</td>
+    </tr>
+    <tr>
+      <td>SIEM &amp; SOC (24/7)</td>
+      <td>detective</td>
+      <td style="text-align:right">70%</td>
+      <td style="text-align:right">$23,691,032</td>
+      <td style="text-align:right">$520,000</td>
+      <td style="text-align:right" class="roi-positive">44.6x</td>
+    </tr>
+    <tr>
+      <td>Web Application Firewall (WAF)</td>
+      <td>preventive</td>
+      <td style="text-align:right">68%</td>
+      <td style="text-align:right">$6,532,582</td>
+      <td style="text-align:right">$150,000</td>
+      <td style="text-align:right" class="roi-positive">42.5x</td>
+    </tr>
+    <tr>
+      <td>Data Loss Prevention (DLP)</td>
+      <td>detective</td>
+      <td style="text-align:right">62%</td>
+      <td style="text-align:right">$7,950,016</td>
+      <td style="text-align:right">$190,000</td>
+      <td style="text-align:right" class="roi-positive">40.8x</td>
+    </tr>
+    <tr>
+      <td>Cloud Security Posture Management</td>
+      <td>detective</td>
+      <td style="text-align:right">72%</td>
+      <td style="text-align:right">$6,512,864</td>
+      <td style="text-align:right">$180,000</td>
+      <td style="text-align:right" class="roi-positive">35.2x</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="footer">
+  CRQ Engine v1.0.0 &bull; FAIR Model &bull; Phalanx Cyber &bull;
+  Generated 2026-03-31 02:22 UTC
+</div>
+
+</div>
+</body>
+</html>
